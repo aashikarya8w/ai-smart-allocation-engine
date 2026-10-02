@@ -2,17 +2,15 @@ import { type LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
+type TrendShorthand = "up" | "down" | "neutral";
+
 interface StatCardProps {
   title: string;
   value: string | number;
   description?: string;
   icon: LucideIcon;
   iconClassName?: string;
-  trend?: {
-    value: number;
-    label: string;
-    positive?: boolean;
-  };
+  trend?: TrendShorthand | { value: number; label: string; positive?: boolean };
   className?: string;
 }
 
@@ -25,6 +23,31 @@ export function StatCard({
   trend,
   className,
 }: StatCardProps) {
+  // Normalise trend to renderable data or null
+  const trendEl = (() => {
+    if (!trend) return null;
+    if (typeof trend === "string") {
+      if (trend === "up")
+        return <p className="mt-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">↑ Increasing</p>;
+      if (trend === "down")
+        return <p className="mt-1 text-xs font-medium text-red-500 dark:text-red-400">↓ Decreasing</p>;
+      return null; // neutral — no indicator
+    }
+    return (
+      <p
+        className={cn(
+          "mt-1 text-xs font-medium",
+          trend.positive !== false
+            ? "text-emerald-600 dark:text-emerald-400"
+            : "text-red-500 dark:text-red-400"
+        )}
+      >
+        {trend.value > 0 ? "+" : ""}
+        {trend.value}% {trend.label}
+      </p>
+    );
+  })();
+
   return (
     <Card className={cn("transition-shadow hover:shadow-md", className)}>
       <CardContent className="p-5">
@@ -37,23 +60,9 @@ export function StatCard({
               {value}
             </p>
             {description && (
-              <p className="mt-0.5 text-xs text-muted-foreground">
-                {description}
-              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
             )}
-            {trend && (
-              <p
-                className={cn(
-                  "mt-1 text-xs font-medium",
-                  trend.positive !== false
-                    ? "text-emerald-600 dark:text-emerald-400"
-                    : "text-red-500 dark:text-red-400"
-                )}
-              >
-                {trend.value > 0 ? "+" : ""}
-                {trend.value}% {trend.label}
-              </p>
-            )}
+            {trendEl}
           </div>
           <div
             className={cn(

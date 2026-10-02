@@ -12,6 +12,7 @@ import {
   BarChart3Icon,
   BellIcon,
   SettingsIcon,
+  StarIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
@@ -24,6 +25,7 @@ const NAV = [
   { href: ROUTES.company.applications, label: "Applications", icon: ClipboardListIcon   },
   { href: ROUTES.company.candidates,   label: "Candidates",   icon: UsersIcon           },
   { href: ROUTES.company.allocations,  label: "Allocations",  icon: AwardIcon           },
+  { href: ROUTES.company.evaluations,  label: "Evaluations",  icon: StarIcon            },
   { href: ROUTES.company.analytics,    label: "Analytics",    icon: BarChart3Icon       },
   { href: ROUTES.company.notifications,label: "Notifications",icon: BellIcon            },
   { href: ROUTES.company.settings,     label: "Settings",     icon: SettingsIcon        },

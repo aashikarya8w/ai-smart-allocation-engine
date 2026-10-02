@@ -3,7 +3,8 @@
 import {
   GraduationCapIcon, BuildingIcon, BriefcaseIcon, ClipboardListIcon,
   AwardIcon, BrainCircuitIcon, PlayIcon, FileTextIcon, PlusIcon,
-  ShieldCheckIcon, TrendingUpIcon, UsersIcon,
+  ShieldCheckIcon, TrendingUpIcon, UsersIcon, RefreshCwIcon,
+  ArrowLeftRightIcon, QrCodeIcon,
 } from "lucide-react";
 import { PageHeader } from "@/components/common/PageHeader";
 import { StatCard } from "@/components/common/StatCard";
@@ -174,6 +175,27 @@ export default function AdminDashboardPage() {
                   <LinkButton href={ROUTES.admin.allocationsPending} variant="outline" size="sm">Review</LinkButton>
                 </div>
               </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Verifications</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-amber-600">{stats.pendingVerifications}</span>
+                  <LinkButton href={ROUTES.admin.verification} variant="outline" size="sm">Review</LinkButton>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Reallocations</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-amber-600">{stats.pendingReallocations}</span>
+                  <LinkButton href={ROUTES.admin.reallocation} variant="outline" size="sm">Review</LinkButton>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Swap Requests</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-amber-600">{stats.pendingSwaps}</span>
+                  <LinkButton href={ROUTES.admin.swaps} variant="outline" size="sm">Review</LinkButton>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
@@ -182,11 +204,14 @@ export default function AdminDashboardPage() {
             <CardHeader><SectionHeader title="Quick Actions" /></CardHeader>
             <CardContent className="space-y-2">
               {[
-                { label: "Add Internship",   href: ROUTES.admin.internships,   icon: PlusIcon          },
-                { label: "Verify Company",   href: ROUTES.admin.companyVerification, icon: ShieldCheckIcon },
-                { label: "Run AI Matching",  href: ROUTES.admin.aiMatchingRun, icon: BrainCircuitIcon  },
-                { label: "Run Allocation",   href: ROUTES.admin.allocations,   icon: PlayIcon          },
-                { label: "Generate Report",  href: ROUTES.admin.reports,       icon: FileTextIcon      },
+                { label: "Add Internship",    href: ROUTES.admin.internships,        icon: PlusIcon           },
+                { label: "Verify Company",    href: ROUTES.admin.companyVerification, icon: ShieldCheckIcon    },
+                { label: "Run AI Matching",   href: ROUTES.admin.aiMatchingRun,       icon: BrainCircuitIcon   },
+                { label: "Run Allocation",    href: ROUTES.admin.allocations,         icon: PlayIcon           },
+                { label: "Review Swaps",      href: ROUTES.admin.swaps,              icon: ArrowLeftRightIcon },
+                { label: "Check-In Monitor",  href: ROUTES.admin.checkIn,            icon: QrCodeIcon         },
+                { label: "View Reallocations",href: ROUTES.admin.reallocation,       icon: RefreshCwIcon      },
+                { label: "Generate Report",   href: ROUTES.admin.reports,            icon: FileTextIcon       },
               ].map(({ label, href, icon: Icon }) => (
                 <LinkButton key={label} href={href} variant="outline" size="sm" className="w-full justify-start gap-2">
                   <Icon className="size-3.5" />{label}

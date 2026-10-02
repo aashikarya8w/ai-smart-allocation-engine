@@ -7,6 +7,8 @@ import {
   ClipboardListIcon, BrainCircuitIcon, AwardIcon, SlidersIcon,
   TagIcon, MapPinIcon, BarChart3Icon, BellIcon, ScrollTextIcon,
   FileTextIcon, ShieldIcon, SettingsIcon, GraduationCapIcon,
+  RefreshCwIcon, ArrowLeftRightIcon, ActivityIcon, QrCodeIcon,
+  StarIcon, TrendingUpIcon, ScaleIcon, FlaskConicalIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
@@ -15,48 +17,66 @@ const NAV_GROUPS = [
   {
     label: "Overview",
     items: [
-      { href: ROUTES.admin.dashboard,  label: "Dashboard",   icon: LayoutDashboardIcon },
+      { href: ROUTES.admin.dashboard,        label: "Dashboard",        icon: LayoutDashboardIcon },
     ],
   },
   {
     label: "Management",
     items: [
-      { href: ROUTES.admin.students,   label: "Students",    icon: GraduationCapIcon   },
-      { href: ROUTES.admin.companies,  label: "Companies",   icon: BuildingIcon        },
-      { href: ROUTES.admin.internships,label: "Internships", icon: BriefcaseIcon       },
-      { href: ROUTES.admin.applications,label:"Applications",icon: ClipboardListIcon   },
+      { href: ROUTES.admin.students,         label: "Students",         icon: GraduationCapIcon   },
+      { href: ROUTES.admin.companies,        label: "Companies",        icon: BuildingIcon        },
+      { href: ROUTES.admin.internships,      label: "Internships",      icon: BriefcaseIcon       },
+      { href: ROUTES.admin.applications,     label: "Applications",     icon: ClipboardListIcon   },
     ],
   },
   {
     label: "AI Engine",
     items: [
-      { href: ROUTES.admin.aiMatching, label: "AI Matching", icon: BrainCircuitIcon    },
-      { href: ROUTES.admin.allocations,label: "Allocations", icon: AwardIcon           },
-      { href: ROUTES.admin.rules,      label: "Rules",       icon: SlidersIcon         },
+      { href: ROUTES.admin.aiMatching,       label: "AI Matching",      icon: BrainCircuitIcon    },
+      { href: ROUTES.admin.allocations,      label: "Allocations",      icon: AwardIcon           },
+      { href: ROUTES.admin.fairness,         label: "Fairness",         icon: ScaleIcon           },
+      { href: ROUTES.admin.reallocation,     label: "Reallocation",     icon: RefreshCwIcon       },
+      { href: ROUTES.admin.swaps,            label: "Swap Management",  icon: ArrowLeftRightIcon  },
+      { href: ROUTES.admin.capacity,         label: "Capacity Sim",     icon: FlaskConicalIcon    },
+      { href: ROUTES.admin.rules,            label: "Rules",            icon: SlidersIcon         },
+    ],
+  },
+  {
+    label: "Verification",
+    items: [
+      { href: ROUTES.admin.verification,     label: "Verification",     icon: QrCodeIcon          },
+      { href: ROUTES.admin.checkIn,          label: "Check-In",         icon: ActivityIcon        },
+    ],
+  },
+  {
+    label: "Outcomes",
+    items: [
+      { href: ROUTES.admin.feedback,         label: "Feedback",         icon: StarIcon            },
+      { href: ROUTES.admin.outcomes,         label: "Outcomes",         icon: TrendingUpIcon      },
     ],
   },
   {
     label: "Configuration",
     items: [
-      { href: ROUTES.admin.skills,     label: "Skills",      icon: TagIcon             },
-      { href: ROUTES.admin.sectors,    label: "Sectors",     icon: TagIcon             },
-      { href: ROUTES.admin.locations,  label: "Locations",   icon: MapPinIcon          },
+      { href: ROUTES.admin.skills,           label: "Skills",           icon: TagIcon             },
+      { href: ROUTES.admin.sectors,          label: "Sectors",          icon: TagIcon             },
+      { href: ROUTES.admin.locations,        label: "Locations",        icon: MapPinIcon          },
     ],
   },
   {
     label: "Reports",
     items: [
-      { href: ROUTES.admin.analytics,  label: "Analytics",   icon: BarChart3Icon       },
-      { href: ROUTES.admin.reports,    label: "Reports",     icon: FileTextIcon        },
-      { href: ROUTES.admin.auditLogs,  label: "Audit Logs",  icon: ScrollTextIcon      },
+      { href: ROUTES.admin.analytics,        label: "Analytics",        icon: BarChart3Icon       },
+      { href: ROUTES.admin.reports,          label: "Reports",          icon: FileTextIcon        },
+      { href: ROUTES.admin.auditLogs,        label: "Audit Logs",       icon: ScrollTextIcon      },
     ],
   },
   {
     label: "System",
     items: [
-      { href: ROUTES.admin.notifications, label: "Notifications", icon: BellIcon      },
-      { href: ROUTES.admin.administrators,label: "Admins",        icon: ShieldIcon     },
-      { href: ROUTES.admin.settings,   label: "Settings",    icon: SettingsIcon        },
+      { href: ROUTES.admin.notifications,    label: "Notifications",    icon: BellIcon            },
+      { href: ROUTES.admin.administrators,   label: "Admins",           icon: ShieldIcon          },
+      { href: ROUTES.admin.settings,         label: "Settings",         icon: SettingsIcon        },
     ],
   },
 ];

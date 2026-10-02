@@ -38,7 +38,7 @@ export function ScoreBar({ label, score, className }: ScoreBarProps) {
 
 interface ScoreCircleProps {
   score: number;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
 }
 
@@ -47,6 +47,7 @@ export function ScoreCircle({ score, size = "md", className }: ScoreCircleProps)
     sm: "size-10 text-xs",
     md: "size-14 text-sm",
     lg: "size-20 text-base",
+    xl: "size-28 text-2xl",
   };
 
   const color =

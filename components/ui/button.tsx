@@ -75,6 +75,7 @@ export function LinkButton({
   return (
     <ButtonPrimitive
       data-slot="button"
+      nativeButton={false}
       render={<Link href={href} />}
       className={cn(buttonVariants({ variant, size, className }))}
     >

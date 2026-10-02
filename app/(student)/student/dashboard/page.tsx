@@ -1,6 +1,6 @@
 "use client";
 
-import { BriefcaseIcon, SparklesIcon, AwardIcon, ClipboardListIcon } from "lucide-react";
+import { BriefcaseIcon, SparklesIcon, AwardIcon, ClipboardListIcon, TargetIcon, FlaskConicalIcon, ClipboardCheckIcon, TrendingUpIcon } from "lucide-react";
 import { PageHeader } from "@/components/common/PageHeader";
 import { StatCard } from "@/components/common/StatCard";
 import { SectionHeader } from "@/components/common/SectionHeader";
@@ -46,6 +46,14 @@ export default function StudentDashboardPage() {
         <StatCard title="Recommendations" value={stats.recommendationsCount} icon={SparklesIcon}      />
         <StatCard title="Shortlisted"     value={stats.shortlistedCount}     icon={BriefcaseIcon}     />
         <StatCard title="Allocated"       value={stats.allocationsCount}     icon={AwardIcon}         />
+      </div>
+
+      {/* AI Scores row */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard title="Top Match Score"     value={`${stats.topMatchScore}%`}   icon={SparklesIcon}        trend="up" />
+        <StatCard title="Job Suitability"     value={`${stats.topSuitability}%`}  icon={TargetIcon}          trend="up" />
+        <StatCard title="Readiness"           value={`${stats.currentReadiness}%`} icon={FlaskConicalIcon}   trend="up" />
+        <StatCard title="Assessments Passed"  value={stats.assessmentsPassed}     icon={ClipboardCheckIcon}  trend="up" />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
@@ -189,6 +197,26 @@ export default function StudentDashboardPage() {
               <p className="text-center text-xs text-muted-foreground">
                 Your best match across all recommendations
               </p>
+            </CardContent>
+          </Card>
+
+          {/* AI Tools quick links */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">AI Analysis Tools</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {[
+                { label: "Skill Gap Analysis",   href: ROUTES.student.skillGap,      icon: TrendingUpIcon      },
+                { label: "Job Suitability",       href: ROUTES.student.suitability,   icon: TargetIcon          },
+                { label: "Readiness Twin",        href: ROUTES.student.readiness,     icon: FlaskConicalIcon    },
+                { label: "What-If Simulator",     href: ROUTES.student.whatIf,        icon: ClipboardCheckIcon  },
+                { label: "Career Roadmap",        href: ROUTES.student.careerRoadmap, icon: AwardIcon           },
+              ].map(({ label, href, icon: Icon }) => (
+                <LinkButton key={label} href={href} variant="outline" size="sm" className="w-full justify-start gap-2">
+                  <Icon className="size-3.5" />{label}
+                </LinkButton>
+              ))}
             </CardContent>
           </Card>
 
