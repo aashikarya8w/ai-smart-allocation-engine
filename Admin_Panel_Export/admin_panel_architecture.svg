@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 520" width="100%" height="100%" style="background:#0a0e17; font-family:'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="frontendGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="backendGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <linearGradient id="adminGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b0764"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#431407"/>
+    </linearGradient>
+    <linearGradient id="engineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#134e4a"/>
+      <stop offset="100%" stop-color="#042f2e"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#a855f7" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glowBlue" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#38bdf8" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#34d399" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Title / Watermark Header -->
+  <text x="30" y="32" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="1">INTERN AI • SYSTEM ARCHITECTURE &amp; ADMIN PANEL HIERARCHY</text>
+
+  <!-- ==================== CONNECTOR PATHS (White/Grey Clean Lines) ==================== -->
+  <g stroke="#94a3b8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Root to Frontend -->
+    <path d="M 870 70 L 870 95 L 260 95 L 260 120" />
+    <!-- Root to Backend -->
+    <path d="M 910 70 L 910 120" />
+
+    <!-- Frontend to Panels -->
+    <!-- to Student Panel -->
+    <path d="M 220 162 L 220 185 L 90 185 L 90 205" />
+    <!-- to Company Panel -->
+    <path d="M 260 162 L 260 205" />
+    <!-- to Admin Panel -->
+    <path d="M 300 162 L 300 185 L 430 185 L 430 205" />
+
+    <!-- Admin Panel to its Sub-Modules -->
+    <path d="M 430 252 L 430 330" />
+    <!-- Left branches from Admin -->
+    <path d="M 430 330 L 90 330 L 90 360" />
+    <path d="M 430 330 L 260 330 L 260 360" />
+    <!-- Center branch -->
+    <path d="M 430 330 L 430 360" />
+    <!-- Right branches from Admin -->
+    <path d="M 430 330 L 600 330 L 600 360" />
+    <path d="M 430 330 L 770 330 L 770 360" />
+
+    <!-- Backend to Database -->
+    <path d="M 870 162 L 870 185 L 600 185 L 600 205" />
+    <!-- Database to Collections -->
+    <path d="M 600 252 L 600 275 L 520 275 L 520 295" />
+    <path d="M 600 275 L 680 275 L 680 295" />
+
+    <!-- Backend to AI Matching Engine -->
+    <path d="M 900 162 L 900 185 L 750 185 L 750 205" />
+    <!-- Matching Engine to sub-nodes -->
+    <path d="M 750 250 L 750 275 L 850 275 L 850 295" />
+    <path d="M 750 275 L 750 295" />
+
+    <!-- Backend to Smart Allocation Engine -->
+    <path d="M 930 162 L 930 185 L 950 185 L 950 205" />
+    <!-- Allocation Engine to sub-nodes -->
+    <path d="M 950 250 L 950 275 L 950 295" />
+    <path d="M 950 275 L 1010 275 L 1010 320" />
+  </g>
+
+  <!-- ==================== ROOT NODE ==================== -->
+  <g transform="translate(790, 20)">
+    <rect width="200" height="50" rx="8" fill="url(#rootGrad)" stroke="#38bdf8" stroke-width="1.8" filter="url(#glowBlue)"/>
+    <text x="100" y="22" fill="#38bdf8" font-size="10.5" font-weight="700" text-anchor="middle" letter-spacing="0.5">SIH25033</text>
+    <text x="100" y="38" fill="#ffffff" font-size="11.5" font-weight="700" text-anchor="middle">AI-Based Smart Allocation Engine</text>
+  </g>
+
+  <!-- ==================== LAYER 1: FRONTEND & BACKEND ==================== -->
+  <!-- Frontend Node -->
+  <g transform="translate(180, 120)">
+    <rect width="160" height="42" rx="21" fill="url(#frontendGrad)" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="80" y="26" fill="#e0e7ff" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="0.5">NEXT.JS FRONTEND</text>
+  </g>
+
+  <!-- Backend Node -->
+  <g transform="translate(830, 120)">
+    <rect width="170" height="42" rx="21" fill="url(#backendGrad)" stroke="#10b981" stroke-width="1.8" filter="url(#glowGreen)"/>
+    <text x="85" y="19" fill="#6ee7b7" font-size="10" font-weight="700" text-anchor="middle">BACKEND</text>
+    <text x="85" y="33" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">NODE.JS + EXPRESS</text>
+  </g>
+
+  <!-- ==================== LAYER 2: PANELS ==================== -->
+  <!-- Student Panel -->
+  <g transform="translate(20, 205)">
+    <rect width="140" height="38" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.4"/>
+    <text x="70" y="24" fill="#e0f2fe" font-size="11" font-weight="700" text-anchor="middle">STUDENT PANEL</text>
+  </g>
+
+  <!-- Company Panel -->
+  <g transform="translate(190, 205)">
+    <rect width="140" height="38" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.4"/>
+    <text x="70" y="24" fill="#e0f2fe" font-size="11" font-weight="700" text-anchor="middle">COMPANY PANEL</text>
+  </g>
+
+  <!-- ADMIN PANEL (SPECIAL HIGHLIGHT - PURPLE GLOW) -->
+  <g transform="translate(355, 205)">
+    <rect width="150" height="44" rx="8" fill="url(#adminGrad)" stroke="#c084fc" stroke-width="2.2" filter="url(#glowPurple)"/>
+    <text x="75" y="27" fill="#f5d0fe" font-size="12" font-weight="800" text-anchor="middle" letter-spacing="1">ADMIN PANEL</text>
+  </g>
+
+  <!-- ==================== BACKEND SUBSYSTEMS ==================== -->
+  <!-- MongoDB Database -->
+  <g transform="translate(540, 205)">
+    <!-- Cylinder Top & Body -->
+    <path d="M 15 8 A 45 10 0 0 1 105 8 A 45 10 0 0 1 15 8 Z" fill="#ea580c"/>
+    <path d="M 15 8 L 15 36 A 45 10 0 0 0 105 36 L 105 8 Z" fill="url(#dbGrad)" stroke="#f97316" stroke-width="1.4"/>
+    <ellipse cx="60" cy="8" rx="45" ry="9" fill="#f97316"/>
+    <text x="60" y="28" fill="#ffffff" font-size="10.5" font-weight="700" text-anchor="middle">MongoDB</text>
+  </g>
+
+  <!-- Database Collections Sub-nodes -->
+  <g transform="translate(460, 295)">
+    <rect width="115" height="30" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+    <text x="57" y="19" fill="#cbd5e1" font-size="9.5" font-weight="600" text-anchor="middle">Users &amp; Students</text>
+  </g>
+  <g transform="translate(620, 295)">
+    <rect width="125" height="30" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+    <text x="62" y="19" fill="#cbd5e1" font-size="9.5" font-weight="600" text-anchor="middle">Allocations &amp; Audits</text>
+  </g>
+
+  <!-- AI Matching Engine -->
+  <g transform="translate(680, 205)">
+    <rect width="145" height="42" rx="10" fill="url(#engineGrad)" stroke="#14b8a6" stroke-width="1.6"/>
+    <text x="72" y="26" fill="#ccfbf1" font-size="11" font-weight="700" text-anchor="middle">AI MATCHING ENGINE</text>
+  </g>
+
+  <g transform="translate(685, 295)">
+    <rect width="125" height="28" rx="5" fill="#134e4a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="62" y="18" fill="#e6fffa" font-size="9.5" font-weight="600" text-anchor="middle">Match Score Calc</text>
+  </g>
+  <g transform="translate(820, 295)">
+    <rect width="125" height="28" rx="5" fill="#134e4a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="62" y="18" fill="#e6fffa" font-size="9.5" font-weight="600" text-anchor="middle">Skill Vector Cosine</text>
+  </g>
+
+  <!-- Smart Allocation Engine -->
+  <g transform="translate(870, 205)">
+    <rect width="165" height="42" rx="10" fill="#0f2b5c" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="82" y="26" fill="#e0f2fe" font-size="11" font-weight="700" text-anchor="middle">SMART ALLOCATION</text>
+  </g>
+
+  <g transform="translate(895, 295)">
+    <rect width="120" height="28" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="60" y="18" fill="#e0f2fe" font-size="9" font-weight="600" text-anchor="middle">Seat Constraints</text>
+  </g>
+  <g transform="translate(950, 325)">
+    <rect width="105" height="26" rx="5" fill="#0f172a" stroke="#64748b" stroke-dasharray="3,3" stroke-width="1"/>
+    <text x="52" y="17" fill="#94a3b8" font-size="8.5" font-weight="600" text-anchor="middle">Future ML Service</text>
+  </g>
+
+  <!-- ==================== DETAILED ADMIN PANEL EXPANSION (Bottom Pillars) ==================== -->
+  <!-- Pillar 1: Governance & Overview -->
+  <g transform="translate(15, 360)">
+    <rect width="150" height="135" rx="7" fill="#111827" stroke="#6366f1" stroke-width="1.4"/>
+    <rect width="150" height="24" rx="6" fill="#1e1b4b"/>
+    <text x="75" y="16" fill="#c7d2fe" font-size="10" font-weight="700" text-anchor="middle">GOVERNANCE &amp; RBAC</text>
+    <text x="12" y="44" fill="#f1f5f9" font-size="10">• Executive Dashboard</text>
+    <text x="12" y="66" fill="#f1f5f9" font-size="10">• Administrators RBAC</text>
+    <text x="12" y="88" fill="#f1f5f9" font-size="10">• Matching Rule Policy</text>
+    <text x="12" y="110" fill="#f1f5f9" font-size="10">• System Settings &amp; Ops</text>
+  </g>
+
+  <!-- Pillar 2: Candidate Verification -->
+  <g transform="translate(180, 360)">
+    <rect width="155" height="135" rx="7" fill="#111827" stroke="#3b82f6" stroke-width="1.4"/>
+    <rect width="155" height="24" rx="6" fill="#1e3a8a"/>
+    <text x="77" y="16" fill="#bfdbfe" font-size="10" font-weight="700" text-anchor="middle">IDENTITY &amp; VERIFICATION</text>
+    <text x="12" y="44" fill="#f1f5f9" font-size="10">• DigiLocker API Link</text>
+    <text x="12" y="66" fill="#f1f5f9" font-size="10">• QR Credential Audit</text>
+    <text x="12" y="88" fill="#f1f5f9" font-size="10">• Fraud Flagging &amp; Reject</text>
+    <text x="12" y="110" fill="#f1f5f9" font-size="10">• Candidate Registry (All)</text>
+  </g>
+
+  <!-- Pillar 3: Matching & Allocation -->
+  <g transform="translate(350, 360)">
+    <rect width="160" height="135" rx="7" fill="#111827" stroke="#a855f7" stroke-width="1.8" filter="url(#glowPurple)"/>
+    <rect width="160" height="24" rx="6" fill="#3b0764"/>
+    <text x="80" y="16" fill="#f5d0fe" font-size="10" font-weight="700" text-anchor="middle">SMART MATCHING STUDIO</text>
+    <text x="12" y="44" fill="#f1f5f9" font-size="10">• 4-Factor Weight Tuner</text>
+    <text x="12" y="66" fill="#f1f5f9" font-size="10">• Dry-Run Simulation</text>
+    <text x="12" y="88" fill="#f1f5f9" font-size="10">• Batch Allocation Publish</text>
+    <text x="12" y="110" fill="#f1f5f9" font-size="10">• Score Breakdown Cards</text>
+  </g>
+
+  <!-- Pillar 4: Capacity & Reallocation -->
+  <g transform="translate(525, 360)">
+    <rect width="150" height="135" rx="7" fill="#111827" stroke="#10b981" stroke-width="1.4"/>
+    <rect width="150" height="24" rx="6" fill="#064e3b"/>
+    <text x="75" y="16" fill="#a7f3d0" font-size="10" font-weight="700" text-anchor="middle">CAPACITY &amp; SWAPS</text>
+    <text x="12" y="44" fill="#f1f5f9" font-size="10">• 24 Sectors Seat Matrix</text>
+    <text x="12" y="66" fill="#f1f5f9" font-size="10">• Corporate Quota Tracker</text>
+    <text x="12" y="88" fill="#f1f5f9" font-size="10">• Drop-Out Reallocation</text>
+    <text x="12" y="110" fill="#f1f5f9" font-size="10">• Peer Mutual Swaps Portal</text>
+  </g>
+
+  <!-- Pillar 5: Compliance, Audit & Fairness -->
+  <g transform="translate(690, 360)">
+    <rect width="160" height="135" rx="7" fill="#111827" stroke="#f59e0b" stroke-width="1.4"/>
+    <rect width="160" height="24" rx="6" fill="#78350f"/>
+    <text x="80" y="16" fill="#fde68a" font-size="10" font-weight="700" text-anchor="middle">FAIRNESS &amp; AUDIT TRAIL</text>
+    <text x="12" y="44" fill="#f1f5f9" font-size="10">• Affirmative Action Quota</text>
+    <text x="12" y="66" fill="#f1f5f9" font-size="10">• Gini Fairness Metric</text>
+    <text x="12" y="88" fill="#f1f5f9" font-size="10">• Immutable SHA-256 Logs</text>
+    <text x="12" y="110" fill="#f1f5f9" font-size="10">• Ministry PDF/CSV Reports</text>
+  </g>
+
+</svg>

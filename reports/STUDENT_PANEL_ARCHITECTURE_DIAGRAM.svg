@@ -1,0 +1,189 @@
+<svg viewBox="0 0 1200 680" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#07090e; font-family:'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <!-- Background Dot Grid -->
+    <pattern id="bgGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1e293b" opacity="0.6"/>
+    </pattern>
+    <!-- Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <!-- Glow Filter -->
+    <filter id="orangeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGrid)"/>
+
+  <!-- Top Title Banner -->
+  <g transform="translate(60, 30)">
+    <rect width="1080" height="70" rx="14" fill="#0c101c" stroke="#1e293b" stroke-width="1.5"/>
+    <rect x="0" y="0" width="8" height="70" rx="4" fill="#f97316"/>
+    <text x="30" y="32" fill="#ffffff" font-size="20" font-weight="900" letter-spacing="0.5">INTERN AI &bull; STUDENT PORTAL &amp; CAREER INTELLIGENCE ARCHITECTURE</text>
+    <text x="30" y="54" fill="#94a3b8" font-size="12">SIH25033: AI-Based Smart Allocation Engine &bull; Candidate Journey, Skill Gap, Readiness Twin &amp; Allocation Pipeline</text>
+    <rect x="880" y="18" width="170" height="34" rx="17" fill="#ea580c" opacity="0.2"/>
+    <rect x="880" y="18" width="170" height="34" rx="17" fill="none" stroke="#f97316" stroke-width="1.5"/>
+    <text x="965" y="40" fill="#f97316" font-size="12" font-weight="bold" text-anchor="middle">LPU &bull; Soam Parkash (12301024)</text>
+  </g>
+
+  <!-- Level 1: Client Layer (Student Access) -->
+  <g transform="translate(60, 130)">
+    <rect width="1080" height="90" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="25" y="30" fill="#f8fafc" font-size="13" font-weight="bold">NEXT.JS 16 CLIENT PRESENTATION LAYER &bull; APP ROUTER (STUDENT ROUTE GROUP)</text>
+    <line x1="25" y1="42" x2="1055" y2="42" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Module Pills -->
+    <g transform="translate(25, 52)">
+      <rect width="155" height="26" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+      <text x="77" y="17" fill="#93c5fd" font-size="10.5" font-weight="bold" text-anchor="middle">Overview Dashboard</text>
+    </g>
+    <g transform="translate(195, 52)">
+      <rect width="155" height="26" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+      <text x="77" y="17" fill="#93c5fd" font-size="10.5" font-weight="bold" text-anchor="middle">Academic Profile</text>
+    </g>
+    <g transform="translate(365, 52)">
+      <rect width="155" height="26" rx="6" fill="#1e293b" stroke="#a855f7"/>
+      <text x="77" y="17" fill="#d8b4fe" font-size="10.5" font-weight="bold" text-anchor="middle">ATS Resume Analyzer</text>
+    </g>
+    <g transform="translate(535, 52)">
+      <rect width="155" height="26" rx="6" fill="#1e293b" stroke="#f97316"/>
+      <text x="77" y="17" fill="#fed7aa" font-size="10.5" font-weight="bold" text-anchor="middle">AI Recommendations</text>
+    </g>
+    <g transform="translate(705, 52)">
+      <rect width="155" height="26" rx="6" fill="#1e293b" stroke="#f97316"/>
+      <text x="77" y="17" fill="#fed7aa" font-size="10.5" font-weight="bold" text-anchor="middle">What-If Simulator</text>
+    </g>
+    <g transform="translate(875, 52)">
+      <rect width="180" height="26" rx="6" fill="#1e293b" stroke="#10b981"/>
+      <text x="90" y="17" fill="#a7f3d0" font-size="10.5" font-weight="bold" text-anchor="middle">Allocation Letter Download</text>
+    </g>
+  </g>
+
+  <!-- Level 2: AI Core Engines & State (Zustand + Microservices) -->
+  <g transform="translate(60, 250)">
+    
+    <!-- Box 1: AI Recommendation & Suitability Engine -->
+    <g transform="translate(0, 0)">
+      <rect width="340" height="180" rx="12" fill="#0c101c" stroke="#f97316" stroke-width="1.8"/>
+      <rect width="340" height="32" rx="12" fill="url(#primaryGrad)"/>
+      <text x="170" y="21" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">AI RECOMMENDATION ENGINE</text>
+      <text x="15" y="55" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Multi-Factor Cosine Similarity</text>
+      <text x="25" y="72" fill="#94a3b8" font-size="10">MatchScore = w1&bull;Skill + w2&bull;Acad + w3&bull;Loc + Equity</text>
+      <text x="15" y="95" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Job Suitability Scoring Index</text>
+      <text x="25" y="112" fill="#94a3b8" font-size="10">Combines technical tests, GPA, and projects</text>
+      <text x="15" y="135" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Category Quota Normalization</text>
+      <text x="25" y="152" fill="#94a3b8" font-size="10">Enforces affirmative action &amp; aspirational districts</text>
+    </g>
+
+    <!-- Box 2: Career Intelligence & Simulation Sandbox -->
+    <g transform="translate(370, 0)">
+      <rect width="340" height="180" rx="12" fill="#0c101c" stroke="#a855f7" stroke-width="1.8"/>
+      <rect width="340" height="32" rx="12" fill="url(#purpleGrad)"/>
+      <text x="170" y="21" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">CAREER INTELLIGENCE &amp; SIMULATOR</text>
+      <text x="15" y="55" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Autonomous Skill Gap Analyzer</text>
+      <text x="25" y="72" fill="#94a3b8" font-size="10">Computes &Delta;gap = &Sigma;MissingSkills / TotalSkills</text>
+      <text x="15" y="95" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Digital Readiness Twin &Delta;R(t)</text>
+      <text x="25" y="112" fill="#94a3b8" font-size="10">Dynamic simulation of student work readiness</text>
+      <text x="15" y="135" fill="#f8fafc" font-size="11" font-weight="bold">&bull; What-If Profile Sandbox</text>
+      <text x="25" y="152" fill="#94a3b8" font-size="10">Models hypothetical skill additions on ranking</text>
+    </g>
+
+    <!-- Box 3: Verification, Assessments & Joining -->
+    <g transform="translate(740, 0)">
+      <rect width="340" height="180" rx="12" fill="#0c101c" stroke="#10b981" stroke-width="1.8"/>
+      <rect width="340" height="32" rx="12" fill="url(#emeraldGrad)"/>
+      <text x="170" y="21" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">VERIFICATION &amp; ATTENDANCE</text>
+      <text x="15" y="55" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Proctored Skill Assessments</text>
+      <text x="25" y="72" fill="#94a3b8" font-size="10">Timed MCQ tests, auto-grading, digital badges</text>
+      <text x="15" y="95" fill="#f8fafc" font-size="11" font-weight="bold">&bull; GPS Geo-Tagged Smart Check-In</text>
+      <text x="25" y="112" fill="#94a3b8" font-size="10">Anti-proxy mobile attendance for stipend release</text>
+      <text x="15" y="135" fill="#f8fafc" font-size="11" font-weight="bold">&bull; Formal Allocation Letter PDF</text>
+      <text x="25" y="152" fill="#94a3b8" font-size="10">Cryptographically verifiable placement letters</text>
+    </g>
+
+  </g>
+
+  <!-- Level 3: Database Entities Layer (MongoDB Schema) -->
+  <g transform="translate(60, 460)">
+    <rect width="1080" height="180" rx="12" fill="#090d16" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="25" y="28" fill="#cbd5e1" font-size="12" font-weight="bold">MONGODB PERSISTENCE LAYER &bull; RELATIONAL SCHEMA ENTITIES (SIH25033)</text>
+    <line x1="25" y1="38" x2="1055" y2="38" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Entity 1: STUDENT -->
+    <g transform="translate(25, 50)">
+      <rect width="185" height="110" rx="6" fill="#0f172a" stroke="#f97316"/>
+      <rect width="185" height="20" rx="6" fill="#f97316"/>
+      <text x="92" y="14" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">STUDENT [PK]</text>
+      <text x="10" y="38" fill="#94a3b8" font-size="9">&bull; fullName, email [UK]</text>
+      <text x="10" y="54" fill="#94a3b8" font-size="9">&bull; socialCategory: Quota</text>
+      <text x="10" y="70" fill="#94a3b8" font-size="9">&bull; district, state</text>
+      <text x="10" y="86" fill="#94a3b8" font-size="9">&bull; isAspirational: Boolean</text>
+      <text x="10" y="102" fill="#94a3b8" font-size="9">&bull; createdAt: DateTime</text>
+    </g>
+
+    <!-- Entity 2: ACADEMIC_PROFILE -->
+    <g transform="translate(240, 50)">
+      <rect width="185" height="110" rx="6" fill="#0f172a" stroke="#3b82f6"/>
+      <rect width="185" height="20" rx="6" fill="#3b82f6"/>
+      <text x="92" y="14" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">ACADEMIC_PROFILE [1:1]</text>
+      <text x="10" y="38" fill="#94a3b8" font-size="9">&bull; studentId: FK [UK]</text>
+      <text x="10" y="54" fill="#94a3b8" font-size="9">&bull; university, branch</text>
+      <text x="10" y="70" fill="#94a3b8" font-size="9">&bull; cgpa: Float &bull; graduation</text>
+      <text x="10" y="86" fill="#94a3b8" font-size="9">&bull; verifiedStatus: Enum</text>
+      <text x="10" y="102" fill="#94a3b8" font-size="9">&bull; digiLockerVerified: Bool</text>
+    </g>
+
+    <!-- Entity 3: CANDIDATE_SKILL -->
+    <g transform="translate(455, 50)">
+      <rect width="185" height="110" rx="6" fill="#0f172a" stroke="#a855f7"/>
+      <rect width="185" height="20" rx="6" fill="#a855f7"/>
+      <text x="92" y="14" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">CANDIDATE_SKILL [1:N]</text>
+      <text x="10" y="38" fill="#94a3b8" font-size="9">&bull; studentId: FK</text>
+      <text x="10" y="54" fill="#94a3b8" font-size="9">&bull; skillName: String</text>
+      <text x="10" y="70" fill="#94a3b8" font-size="9">&bull; proficiency: Enum</text>
+      <text x="10" y="86" fill="#94a3b8" font-size="9">&bull; yearsExperience: Int</text>
+      <text x="10" y="102" fill="#94a3b8" font-size="9">&bull; isVerifiedByTest: Bool</text>
+    </g>
+
+    <!-- Entity 4: APPLICATION & ALLOCATION -->
+    <g transform="translate(670, 50)">
+      <rect width="185" height="110" rx="6" fill="#0f172a" stroke="#e11d48"/>
+      <rect width="185" height="20" rx="6" fill="#e11d48"/>
+      <text x="92" y="14" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">ALLOCATION [1:1 Active]</text>
+      <text x="10" y="38" fill="#94a3b8" font-size="9">&bull; studentId: FK [UK]</text>
+      <text x="10" y="54" fill="#94a3b8" font-size="9">&bull; internshipId: FK</text>
+      <text x="10" y="70" fill="#94a3b8" font-size="9">&bull; matchScore: Float</text>
+      <text x="10" y="86" fill="#94a3b8" font-size="9">&bull; letterUrl: PDF</text>
+      <text x="10" y="102" fill="#94a3b8" font-size="9">&bull; status: Confirmed</text>
+    </g>
+
+    <!-- Entity 5: CHECK_IN_LOG -->
+    <g transform="translate(885, 50)">
+      <rect width="170" height="110" rx="6" fill="#0f172a" stroke="#eab308"/>
+      <rect width="170" height="20" rx="6" fill="#eab308"/>
+      <text x="85" y="14" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">CHECK_IN_LOG [GPS]</text>
+      <text x="10" y="38" fill="#94a3b8" font-size="9">&bull; studentId: FK</text>
+      <text x="10" y="54" fill="#94a3b8" font-size="9">&bull; lat, long: Float</text>
+      <text x="10" y="70" fill="#94a3b8" font-size="9">&bull; verificationType</text>
+      <text x="10" y="86" fill="#94a3b8" font-size="9">&bull; timestamp: DateTime</text>
+      <text x="10" y="102" fill="#94a3b8" font-size="9">&bull; stipendReleased: Bool</text>
+    </g>
+
+  </g>
+
+</svg>

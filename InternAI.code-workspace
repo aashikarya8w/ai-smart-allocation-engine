@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "InternAI (All Files)",
+      "path": "."
+    },
+    {
+      "name": "Frontend (Next.js)",
+      "path": "frontend"
+    },
+    {
+      "name": "Backend (Express)",
+      "path": "backend"
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "frontend/node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "eslint.workingDirectories": [
+      "./frontend",
+      "./backend"
+    ]
+  }
+}

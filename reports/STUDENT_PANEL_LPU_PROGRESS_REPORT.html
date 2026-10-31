@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intern AI - Student Portal Capstone Progress Report (LPU)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --lpu-navy: #0b1f3a;
+      --lpu-gold: #c59b27;
+      --lpu-orange: #f26522;
+      --student-blue: #1d4ed8;
+      --student-teal: #0f766e;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --bg-slate: #f1f5f9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      color: var(--text-main);
+      background-color: #94a3b8;
+      line-height: 1.5;
+      font-size: 12.5px;
+    }
+
+    /* Floating Print Toolbar */
+    .toolbar {
+      position: sticky;
+      top: 12px;
+      z-index: 9999;
+      max-width: 860px;
+      margin: 0 auto 16px auto;
+      background: #0b1329;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      border: 1px solid #1e293b;
+    }
+    .toolbar .title { font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 8px; }
+    .toolbar button {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.4);
+      transition: all 0.2s;
+    }
+    .toolbar button:hover { background: #1e40af; transform: translateY(-1px); }
+
+    /* A4 Document Pages */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 22mm 24mm 20mm 24mm;
+      margin: 22px auto;
+      background: white;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.18);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 5px solid var(--student-blue);
+    }
+
+    .page-content { flex: 1; }
+
+    /* Running Header & Footer */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .page-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: #64748b;
+      margin-top: 14px;
+    }
+
+    /* Cover Page Specifics */
+    .cover-border-box {
+      border: 2px solid #0f172a;
+      padding: 24px 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+      background: #fafafa;
+    }
+
+    .cover-border-box::before {
+      content: "";
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid #94a3b8;
+      pointer-events: none;
+    }
+
+    .univ-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #475569;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .univ-main-title {
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0b1f3a;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .univ-dept {
+      font-size: 12px;
+      color: #475569;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .cover-divider {
+      width: 100px;
+      height: 3px;
+      background: var(--lpu-orange);
+      margin: 14px auto;
+    }
+
+    .project-hero-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .cover-project-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .cover-project-subtitle {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--student-blue);
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    /* Distinct Candidate Credential Card */
+    .candidate-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      padding: 14px 18px;
+      border-radius: 8px;
+      text-align: left;
+      margin: 16px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .candidate-card-grid .col h4 {
+      font-size: 10px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+    .candidate-card-grid .col p {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .candidate-card-grid .col span {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .scope-callout-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--student-blue);
+      padding: 10px 14px;
+      text-align: left;
+      border-radius: 0 6px 6px 0;
+      margin-top: 10px;
+    }
+    .scope-callout-box strong { color: #0f172a; font-size: 11.5px; display: block; margin-bottom: 2px; }
+    .scope-callout-box p { font-size: 11.5px; color: #334155; line-height: 1.45; margin: 0; }
+
+    /* Chapter / Section Headers */
+    .chapter-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--student-blue);
+      margin-bottom: 2px;
+    }
+
+    h2.section-header {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 14px 0 8px 0;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h3.sub-header {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin: 12px 0 4px 0;
+    }
+
+    p { margin-bottom: 8px; text-align: justify; line-height: 1.5; }
+
+    ul, ol { margin-left: 20px; margin-bottom: 10px; }
+    li { margin-bottom: 3.5px; }
+
+    /* 3-Column Modern Tables (Distinct from Admin) */
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-size: 11px;
+    }
+
+    table.custom-table th {
+      background: #0f2b5c;
+      color: white;
+      font-weight: 700;
+      text-align: left;
+      padding: 7px 10px;
+      letter-spacing: 0.5px;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      border: 1px solid #0f2b5c;
+    }
+
+    table.custom-table td {
+      border: 1px solid #cbd5e1;
+      padding: 6.5px 10px;
+      vertical-align: middle;
+    }
+
+    table.custom-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Key Student Innovation Box */
+    .innovation-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid #16a34a;
+      border-radius: 4px;
+      padding: 9px 13px;
+      margin: 10px 0;
+      font-size: 11px;
+      color: #166534;
+      line-height: 1.45;
+    }
+    .innovation-box strong { font-size: 11.5px; }
+
+    /* Visual Architecture Box */
+    .arch-card {
+      background: #060a12;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0 14px 0;
+      border: 1px solid #1e293b;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+
+    /* Mockup Figure Cards */
+    .screen-card {
+      margin: 10px 0 14px 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .screen-header {
+      background: #0b1329;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .screen-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .screen-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .dot-1 { background: #ef4444; }
+    .dot-2 { background: #f59e0b; }
+    .dot-3 { background: #10b981; }
+
+    .screen-body {
+      padding: 10px 12px;
+      background: #f8fafc;
+      font-size: 11px;
+    }
+
+    .screen-caption {
+      text-align: center;
+      font-weight: 700;
+      font-size: 11.5px;
+      margin-top: 3px;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    /* Micro Badges */
+    .pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .pill-blue { background: #dbeafe; color: #1e40af; }
+    .pill-green { background: #dcfce7; color: #15803d; }
+    .pill-orange { background: #ffedd5; color: #c2410c; }
+    .pill-purple { background: #f3e8ff; color: #7e22ce; }
+
+    /* Print media */
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+        padding: 16mm 18mm 14mm 18mm;
+      }
+      .page:last-child { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print Toolbar -->
+  <div class="toolbar">
+    <div class="title">🎓 LPU Capstone Progress Report: Candidate Portal & Career Intelligence Suite</div>
+    <button onclick="window.print()">🖨️ Print / Save as PDF (Ctrl + P)</button>
+  </div>
+
+  <!-- ========================================================
+       PAGE 1: DISTINCT STUDENT CAPSTONE COVER PAGE
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content" style="height: 100%;">
+      
+      <div class="cover-border-box">
+        
+        <div>
+          <div class="univ-tag">Lovely Professional University &bull; Punjab</div>
+          <div class="univ-main-title">School of Computer Science &amp; Engineering</div>
+          <div class="univ-dept">B.Tech Capstone Project Progress Evaluation (2025–2026)</div>
+          <div class="cover-divider"></div>
+        </div>
+
+        <div style="margin: 20px 0;">
+          <div class="project-hero-badge">SIH25033 &bull; PM INTERNSHIP SCHEME (PMIS)</div>
+          <div class="cover-project-title">Intern AI: Smart Job Allocation Engine</div>
+          <div class="cover-project-subtitle">Candidate Experience &amp; Student Career Intelligence Portal</div>
+          <p style="font-size: 12px; color: #475569; max-width: 520px; margin: 0 auto; line-height: 1.45;">
+            An autonomous, AI-driven candidate discovery and skill remediation system designed to ensure transparent, merit-based, and non-discriminatory corporate placements for Indian undergraduates.
+          </p>
+        </div>
+
+        <!-- Student & Evaluator Credentials Grid -->
+        <div class="candidate-card-grid">
+          <div class="col">
+            <h4>Candidate Details</h4>
+            <p>Aashik Kumar</p>
+            <span>Registration No: <strong>12306949</strong></span><br>
+            <span>B.Tech Computer Science &amp; Engineering</span>
+          </div>
+          <div class="col">
+            <h4>Evaluation Mentor</h4>
+            <p>Konne Madhavi</p>
+            <span>Faculty Mentor &bull; Assistant Professor</span><br>
+            <span>Department of CSE, LPU</span>
+          </div>
+        </div>
+
+        <!-- Distinct Statement of Contribution -->
+        <div class="scope-callout-box">
+          <strong>Candidate Portal Statement of Contribution:</strong>
+          <p>
+            This progress submission covers the specialized design and full-stack implementation of the <strong>Student Portal</strong>. It addresses student-centric placement challenges through automated ATS resume parsing, explainable AI recommendation breakdowns, autonomous skill-gap roadmaps, predictive readiness digital twins, and anti-proxy GPS geo-check-in verification for government stipend release.
+          </p>
+        </div>
+
+        <div style="font-size: 11px; color: #64748b; margin-top: 10px;">
+          Academic Session 2025–26 &bull; Lovely Professional University, Phagwara, Punjab
+        </div>
+
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 1 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 2: EXECUTIVE SUMMARY, BACKGROUND & OBJECTIVES
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 1.0 &bull; Context &amp; Motivation</div>
+      <h2 class="section-header">1. Executive Summary &amp; Problem Statement</h2>
+      <p>
+        Under the Government of India's <strong>Prime Minister's Internship Scheme (PMIS)</strong>, over 1.2 crore youth from across 28 states and union territories seek high-quality corporate exposure across top 500 enterprises. However, existing public placement portals operate merely as passive bulletin boards. Students face severe systemic friction: opaque rejection without actionable feedback, extreme geographical concentration around metropolitan hubs, and the "fresher cold-start" deficit where candidates lack industry-aligned resume keywords.
+      </p>
+      <p>
+        The <strong>Intern AI Student Portal (SIH25033)</strong> resolves these challenges by introducing an active career progression ecosystem. Rather than submitting blind applications, students receive transparent match explanations, diagnostic ATS resume assessments, curated learning pathways to bridge identified skill deltas, a predictive "Readiness Digital Twin", an interactive "What-If" career simulator, and cryptographic GPS-verified attendance logging for guaranteed stipend disbursement.
+      </p>
+
+      <div class="innovation-box">
+        <strong>Core Candidate Innovation:</strong> Transforming rejection into self-directed learning. When a candidate does not match a corporate opening, the portal decomposes the exact missing competencies and instantly provisions a time-bounded learning roadmap with free certified course links.
+      </div>
+
+      <div class="chapter-badge">Section 2.0 &bull; Student-Centric Objectives</div>
+      <h2 class="section-header">2. Candidate Portal Objectives</h2>
+      <ol>
+        <li><strong>Unified Academic Ledger:</strong> Provide a tamper-proof profile repository capturing degree, verified CGPA, social reservation category (SC/ST/OBC/EWS), aspirational district status, and certified domain competencies.</li>
+        <li><strong>Explainable AI Matching &amp; Recommendations:</strong> Deliver ranked opportunity recommendations categorized into Highest Match, Skill Fit, and Aspirational tiers, explaining why a candidate qualifies.</li>
+        <li><strong>Automated ATS Resume Analyzer:</strong> Parse uploaded resumes in real-time, extracting technical keywords and providing structural formatting diagnosis before corporate submission.</li>
+        <li><strong>Autonomous Skill Gap Decomposition:</strong> Identify specific technical deltas between candidate abilities and job requirements, computing estimated upskill duration.</li>
+        <li><strong>Readiness Digital Twin &amp; What-If Simulation Sandbox:</strong> Enable students to model the placement impact of acquiring a certification or improving CGPA before committing study hours.</li>
+        <li><strong>One-Click Allocation Letter &amp; Smart Check-In:</strong> Issue verifiable PDF allocation letters and enable anti-proxy GPS geo-verified workplace check-in for automated stipend compliance.</li>
+      </ol>
+
+      <div class="chapter-badge">Section 3.0 &bull; Technology Architecture</div>
+      <h2 class="section-header">3. Student Portal Technology Matrix</h2>
+      <p>The candidate interface utilizes modern web engineering standards designed for high responsiveness on low-bandwidth mobile networks:</p>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Layer</th>
+            <th style="width: 32%;">Selected Technology</th>
+            <th>Candidate Experience Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Client Framework</strong></td>
+            <td>Next.js 16.3 (Turbopack) + React 19</td>
+            <td>Sub-second route transitions and instant client-side rendering for application forms.</td>
+          </tr>
+          <tr>
+            <td><strong>Type Safety</strong></td>
+            <td>TypeScript 5.0 (Strict Mode)</td>
+            <td>Prevents client runtime crashes during resume parsing and profile updates.</td>
+          </tr>
+          <tr>
+            <td><strong>Styling &amp; Theme</strong></td>
+            <td>Tailwind CSS 4 + Inline Tokens</td>
+            <td>Light &amp; Dark modes with 6 customizable accent colors to reduce eye strain during exams.</td>
+          </tr>
+          <tr>
+            <td><strong>State Management</strong></td>
+            <td>Zustand v5 (Lightweight Stores)</td>
+            <td>Instant client updates across application tracking without unnecessary re-renders.</td>
+          </tr>
+          <tr>
+            <td><strong>Data Visualization</strong></td>
+            <td>Recharts</td>
+            <td>Interactive competency radar charts and dynamic readiness progression curves.</td>
+          </tr>
+          <tr>
+            <td><strong>Backend Microservices</strong></td>
+            <td>Node.js 22 LTS / Express REST APIs</td>
+            <td>High-throughput recommendation ranking and proctored assessment grading.</td>
+          </tr>
+          <tr>
+            <td><strong>Data Persistence</strong></td>
+            <td>MongoDB 7.0 + Mongoose</td>
+            <td>Compound indexing enabling sub-50ms query speeds over candidate records.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 2 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 3: STUDENT FUNCTIONAL MODULES BREAKDOWN
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 4.0 &bull; Candidate Workflows</div>
+      <h2 class="section-header">4. Student Portal Functional Module Specifications</h2>
+      <p>The candidate experience is structured across 14 dedicated modules spanning three core phases: Preparation, Opportunity Discovery, and Workplace Onboarding:</p>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Module Name</th>
+            <th style="width: 22%;">Portal Route</th>
+            <th style="width: 26%;">Core Functional Scope</th>
+            <th>Candidate Impact &amp; Deliverables</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Command Dashboard</strong></td>
+            <td><code>/student/dashboard</code></td>
+            <td>Aggregated metrics: active applications, top match %, readiness score, action alerts.</td>
+            <td>Single-screen situational awareness with urgent deadline notifications.</td>
+          </tr>
+          <tr>
+            <td><strong>Academic Ledger</strong></td>
+            <td><code>/student/profile</code></td>
+            <td>College affiliation, branch, CGPA, affirmative action quota, location preferences.</td>
+            <td>Centralized digital transcript powering all AI recommendation matching.</td>
+          </tr>
+          <tr>
+            <td><strong>ATS Resume Analyzer</strong></td>
+            <td><code>/student/resume</code></td>
+            <td>Parses uploaded PDF/DOCX resumes, calculates keyword density and structural readability.</td>
+            <td>Instant feedback diagnosing missing industry keywords before job application.</td>
+          </tr>
+          <tr>
+            <td><strong>Internship Catalog</strong></td>
+            <td><code>/student/internships</code></td>
+            <td>Search across 24 industry sectors, stipend filters, remote/on-site modes.</td>
+            <td>Transparent exploration with clear minimum eligibility prerequisites.</td>
+          </tr>
+          <tr>
+            <td><strong>AI Recommendations</strong></td>
+            <td><code>/student/recommendations</code></td>
+            <td>Algorithmic ranking into Highest Match (>90%), Skill Fit (75-90%), and Aspirational.</td>
+            <td>Eliminates candidate search fatigue with explainable compatibility scores.</td>
+          </tr>
+          <tr>
+            <td><strong>Application Tracker</strong></td>
+            <td><code>/student/applications</code></td>
+            <td>Visual Kanban pipeline: Submitted &rarr; Review &rarr; Interview &rarr; Offer &rarr; Confirmed.</td>
+            <td>Complete transparency eliminating opaque corporate hiring delays.</td>
+          </tr>
+          <tr>
+            <td><strong>My Allocation</strong></td>
+            <td><code>/student/allocations</code></td>
+            <td>Formal placement portal with supervisor contact and Allocation Letter PDF.</td>
+            <td>Cryptographically signed placement credential protecting student rights.</td>
+          </tr>
+          <tr>
+            <td><strong>Skill Gap Visualizer</strong></td>
+            <td><code>/student/skill-gap</code></td>
+            <td>Compares candidate competencies against role requirements to extract deltas.</td>
+            <td>Provides direct links to free training modules with estimated days to complete.</td>
+          </tr>
+          <tr>
+            <td><strong>Readiness Digital Twin</strong></td>
+            <td><code>/student/readiness</code></td>
+            <td>Trajectory score combining technical, behavioral, and verification milestones.</td>
+            <td>Continuous progress tracking showing workplace readiness readiness index.</td>
+          </tr>
+          <tr>
+            <td><strong>What-If Simulator</strong></td>
+            <td><code>/student/what-if</code></td>
+            <td>Interactive sandbox modeling hypothetical credential additions.</td>
+            <td>Demonstrates projected competitive rank shifts before starting a course.</td>
+          </tr>
+          <tr>
+            <td><strong>Domain Assessments</strong></td>
+            <td><code>/student/assessments</code></td>
+            <td>Timed proctored MCQs with automated score normalization.</td>
+            <td>Validates self-reported skills to boost algorithmic placement ranking.</td>
+          </tr>
+          <tr>
+            <td><strong>Smart Geo Check-In</strong></td>
+            <td><code>/student/check-in</code></td>
+            <td>GPS geo-tagged and QR-verified joining check-in.</td>
+            <td>Validates physical workplace attendance for automated government stipend release.</td>
+          </tr>
+          <tr>
+            <td><strong>Grievance &amp; 360 Feedback</strong></td>
+            <td><code>/student/feedback</code></td>
+            <td>Structured portal for submitting mentor ratings and workplace feedback.</td>
+            <td>Ensures safe corporate working environments under government oversight.</td>
+          </tr>
+          <tr>
+            <td><strong>Competency Outcomes</strong></td>
+            <td><code>/student/outcomes</code></td>
+            <td>Post-internship skill uplift tracking and Pre-Placement Offer (PPO) recording.</td>
+            <td>Formal exit ledger for permanent academic and career records.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 3 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 4: WORKFLOW INTERACTIONS & ENGINEERING DECISIONS
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 5.0 &bull; Interaction Workflows</div>
+      <h2 class="section-header">5. Candidate User Journeys &amp; Workflows</h2>
+
+      <h3 class="sub-header">5.1 AI-Assisted Discovery &amp; Match Explanation</h3>
+      <p>
+        When a candidate accesses recommendations, each corporate posting displays a composite compatibility index. Instead of a black-box percentage, the student can expand the card to inspect individual dimensions: skill alignment, academic rigor, preferred district proximity, and affirmative action quota eligibility.
+      </p>
+
+      <h3 class="sub-header">5.2 Autonomous Skill Gap Remediation</h3>
+      <p>
+        For listings where the candidate falls below the threshold, the portal immediately isolates missing prerequisites. For instance, if an applicant possesses React and JavaScript but lacks Docker, the system surfaces a curated learning pathway outlining estimated time commitment (e.g., 5 days) and free certified course links.
+      </p>
+
+      <h3 class="sub-header">5.3 "What-If" Profile Simulation Sandbox</h3>
+      <p>
+        The simulator provides an interactive predictive sandbox. Students test hypothetical actions—such as completing an AWS certification or lifting their CGPA from 7.5 to 8.2. The engine recalculates vector similarity in real time, showing the exact number of newly accessible corporate seats and rank shifts.
+      </p>
+
+      <h3 class="sub-header">5.4 Anti-Proxy Smart Check-In &amp; Stipend Validation</h3>
+      <p>
+        To prevent fraudulent attendance while eliminating paperwork, placed interns verify on-premise arrival via GPS geo-fencing (50-meter corporate radius) and QR handshake. This triggers instant attendance logging, enabling the Ministry to disburse the monthly stipend directly into the student's Aadhaar-linked bank account.
+      </p>
+
+      <div class="chapter-badge">Section 6.0 &bull; Implementation Decisions</div>
+      <h2 class="section-header">6. Architectural Decisions &amp; Engineering Rationale</h2>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Engineering Decision</th>
+            <th style="width: 32%;">Technical Implementation</th>
+            <th>Candidate Experience Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Monorepo Decoupling</strong></td>
+            <td>Independent Next.js route groups</td>
+            <td>Ensures candidate portal remains snappy and unaffected by heavy administrative batch queries.</td>
+          </tr>
+          <tr>
+            <td><strong>Client Fallback Resilience</strong></td>
+            <td>Local state hydration with mock fallbacks</td>
+            <td>Prevents screen freezes during peak college hours if campus Wi-Fi fluctuates.</td>
+          </tr>
+          <tr>
+            <td><strong>Multi-Color Theme Studio</strong></td>
+            <td>CSS Variables + LocalStorage sync</td>
+            <td>Provides Dark and Light modes with 6 high-contrast accent palettes for extended study comfort.</td>
+          </tr>
+          <tr>
+            <td><strong>Declarative Form Validation</strong></td>
+            <td>Zod schemas + React Hook Form</td>
+            <td>Delivers immediate inline validation feedback before submitting extensive academic forms.</td>
+          </tr>
+          <tr>
+            <td><strong>Zero External CDN Dependency</strong></td>
+            <td>Locally bundled system vector assets</td>
+            <td>Guarantees fast load times on 3G/4G mobile networks across rural aspirational districts.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-header">6.1 Candidate Data Privacy &amp; OWASP Security</h3>
+      <ul>
+        <li><strong>Strict Candidate Data Isolation:</strong> Role-Based Access Control guarantees students can only view their own credentials, application states, and offer letters.</li>
+        <li><strong>PII Encryption:</strong> Aadhaar numbers and socioeconomic verification documents are encrypted at rest using AES-256 and masked in shared views.</li>
+        <li><strong>Anti-Spoofing Geo Verification:</strong> Check-in endpoints detect mock GPS locations and virtualized network proxies to maintain complete integrity.</li>
+      </ul>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 4 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 5: DISTINCT STUDENT SYSTEM ARCHITECTURE DIAGRAM
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 7.0 &bull; System Architecture</div>
+      <h2 class="section-header">7. Candidate Portal System Architecture &amp; Dataflow</h2>
+      <p>
+        The architectural schematic below illustrates the end-to-end operational pipeline of the <strong>Intern AI Student Portal (SIH25033)</strong>, detailing how student actions flow through the Next.js presentation tier, AI recommendation engines, and persistent MongoDB collections:
+      </p>
+
+      <!-- Distinct Candidate Journey & Architecture Vector SVG Diagram -->
+      <div class="arch-card">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 480" style="width:100%; height:auto; font-family:'Segoe UI', Arial, sans-serif;">
+          <defs>
+            <linearGradient id="gHeader" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#0f172a"/></linearGradient>
+            <linearGradient id="gStudent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#0369a1"/></linearGradient>
+            <linearGradient id="gMatch" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient>
+            <linearGradient id="gTwin" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#6d28d9"/></linearGradient>
+            <linearGradient id="gCheck" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ea580c"/><stop offset="100%" stop-color="#c2410c"/></linearGradient>
+            <linearGradient id="gDb" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#334155"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+          </defs>
+
+          <!-- Top Banner -->
+          <g transform="translate(40, 20)">
+            <rect width="980" height="50" rx="8" fill="url(#gHeader)" stroke="#3b82f6" stroke-width="1.5"/>
+            <text x="30" y="31" fill="#ffffff" font-size="14" font-weight="800" letter-spacing="0.5">INTERN AI &bull; CANDIDATE CAREER INTELLIGENCE &amp; ALLOCATION PIPELINE</text>
+            <text x="950" y="31" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="end">SIH25033 &bull; Student Portal Architecture</text>
+          </g>
+
+          <!-- Tier 1: Candidate Access Viewports -->
+          <g transform="translate(40, 95)">
+            <rect width="980" height="70" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+            <text x="25" y="24" fill="#94a3b8" font-size="10" font-weight="700" letter-spacing="1">TIER 1: CANDIDATE CLIENT INTERACTION LAYER (NEXT.JS 16 &bull; APP ROUTER)</text>
+            
+            <g transform="translate(25, 34)"><rect width="180" height="26" rx="5" fill="#1e293b" stroke="#38bdf8"/><text x="90" y="17" fill="#e0f2fe" font-size="10" font-weight="700" text-anchor="middle">Student Dashboard</text></g>
+            <g transform="translate(220, 34)"><rect width="180" height="26" rx="5" fill="#1e293b" stroke="#38bdf8"/><text x="90" y="17" fill="#e0f2fe" font-size="10" font-weight="700" text-anchor="middle">ATS Resume Analyzer</text></g>
+            <g transform="translate(415, 34)"><rect width="180" height="26" rx="5" fill="#1e293b" stroke="#38bdf8"/><text x="90" y="17" fill="#e0f2fe" font-size="10" font-weight="700" text-anchor="middle">AI Recommendations</text></g>
+            <g transform="translate(610, 34)"><rect width="180" height="26" rx="5" fill="#1e293b" stroke="#38bdf8"/><text x="90" y="17" fill="#e0f2fe" font-size="10" font-weight="700" text-anchor="middle">Skill Gap &amp; What-If</text></g>
+            <g transform="translate(805, 34)"><rect width="150" height="26" rx="5" fill="#1e293b" stroke="#38bdf8"/><text x="75" y="17" fill="#e0f2fe" font-size="10" font-weight="700" text-anchor="middle">GPS Check-In</text></g>
+          </g>
+
+          <!-- Connecting Arrows -->
+          <g stroke="#64748b" stroke-width="1.5" fill="none">
+            <path d="M 155 165 L 155 205" marker-end="url(#arrow)"/>
+            <path d="M 390 165 L 390 205" marker-end="url(#arrow)"/>
+            <path d="M 640 165 L 640 205" marker-end="url(#arrow)"/>
+            <path d="M 880 165 L 880 205" marker-end="url(#arrow)"/>
+          </g>
+
+          <!-- Tier 2: Core Processing & AI Intelligence Engines -->
+          <g transform="translate(40, 205)">
+            <rect width="980" height="135" rx="8" fill="#090d16" stroke="#1e293b" stroke-width="1.2"/>
+            <text x="25" y="24" fill="#94a3b8" font-size="10" font-weight="700" letter-spacing="1">TIER 2: CANDIDATE CAREER ENGINES &amp; MICROSERVICES (NODE.JS + EXPRESS)</text>
+            
+            <!-- Box 1 -->
+            <g transform="translate(25, 36)">
+              <rect width="215" height="85" rx="6" fill="#111827" stroke="#0284c7" stroke-width="1.4"/>
+              <rect width="215" height="20" rx="5" fill="url(#gStudent)"/>
+              <text x="107" y="14" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Profile &amp; Resume Intelligence</text>
+              <text x="10" y="38" fill="#cbd5e1" font-size="9">• Academic Ledger Sync</text>
+              <text x="10" y="54" fill="#cbd5e1" font-size="9">• ATS Keyword Density Extractor</text>
+              <text x="10" y="70" fill="#cbd5e1" font-size="9">• Format &amp; Readability Score</text>
+            </g>
+
+            <!-- Box 2 -->
+            <g transform="translate(265, 36)">
+              <rect width="215" height="85" rx="6" fill="#111827" stroke="#059669" stroke-width="1.4"/>
+              <rect width="215" height="20" rx="5" fill="url(#gMatch)"/>
+              <text x="107" y="14" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Multi-Factor Match Engine</text>
+              <text x="10" y="38" fill="#cbd5e1" font-size="9">• Cosine Skill Compatibility</text>
+              <text x="10" y="54" fill="#cbd5e1" font-size="9">• Academic &amp; Location Proximity</text>
+              <text x="10" y="70" fill="#cbd5e1" font-size="9">• Explainable Score Breakdown</text>
+            </g>
+
+            <!-- Box 3 -->
+            <g transform="translate(505, 36)">
+              <rect width="215" height="85" rx="6" fill="#111827" stroke="#7c3aed" stroke-width="1.4"/>
+              <rect width="215" height="20" rx="5" fill="url(#gTwin)"/>
+              <text x="107" y="14" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Skill Gap &amp; Digital Twin</text>
+              <text x="10" y="38" fill="#cbd5e1" font-size="9">• Missing Competency Extraction</text>
+              <text x="10" y="54" fill="#cbd5e1" font-size="9">• Curated Free Learning Modules</text>
+              <text x="10" y="70" fill="#cbd5e1" font-size="9">• What-If Scenario Projection</text>
+            </g>
+
+            <!-- Box 4 -->
+            <g transform="translate(745, 36)">
+              <rect width="210" height="85" rx="6" fill="#111827" stroke="#ea580c" stroke-width="1.4"/>
+              <rect width="210" height="20" rx="5" fill="url(#gCheck)"/>
+              <text x="105" y="14" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Verification &amp; Check-In</text>
+              <text x="10" y="38" fill="#cbd5e1" font-size="9">• Proctored Assessment Hub</text>
+              <text x="10" y="54" fill="#cbd5e1" font-size="9">• 1:1 Offer Acceptance Lock</text>
+              <text x="10" y="70" fill="#cbd5e1" font-size="9">• GPS Radius Stipend Check-In</text>
+            </g>
+          </g>
+
+          <!-- Connecting Arrows -->
+          <g stroke="#64748b" stroke-width="1.5" fill="none">
+            <path d="M 530 340 L 530 375"/>
+          </g>
+
+          <!-- Tier 3: MongoDB Student Data Schema -->
+          <g transform="translate(40, 375)">
+            <rect width="980" height="75" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+            <text x="25" y="22" fill="#94a3b8" font-size="10" font-weight="700" letter-spacing="1">TIER 3: MONGODB PERSISTENT CANDIDATE COLLECTIONS (INDEXED DATASETS)</text>
+            
+            <g transform="translate(25, 32)"><rect width="180" height="30" rx="5" fill="url(#gDb)" stroke="#475569"/><text x="90" y="19" fill="#f1f5f9" font-size="9.5" font-weight="600" text-anchor="middle">StudentProfiles &amp; CGPA</text></g>
+            <g transform="translate(220, 32)"><rect width="180" height="30" rx="5" fill="url(#gDb)" stroke="#475569"/><text x="90" y="19" fill="#f1f5f9" font-size="9.5" font-weight="600" text-anchor="middle">CandidateSkills &amp; ATS</text></g>
+            <g transform="translate(415, 32)"><rect width="180" height="30" rx="5" fill="url(#gDb)" stroke="#475569"/><text x="90" y="19" fill="#f1f5f9" font-size="9.5" font-weight="600" text-anchor="middle">Applications &amp; Matches</text></g>
+            <g transform="translate(610, 32)"><rect width="180" height="30" rx="5" fill="url(#gDb)" stroke="#475569"/><text x="90" y="19" fill="#f1f5f9" font-size="9.5" font-weight="600" text-anchor="middle">Allocations &amp; Letters</text></g>
+            <g transform="translate(805, 32)"><rect width="150" height="30" rx="5" fill="url(#gDb)" stroke="#475569"/><text x="75" y="19" fill="#f1f5f9" font-size="9.5" font-weight="600" text-anchor="middle">GeoCheckInLogs (GPS)</text></g>
+          </g>
+        </svg>
+      </div>
+
+      <p style="font-size: 11px; color: #475569; margin-top: 4px;">
+        <strong>Dataflow Overview:</strong> Candidate updates to resumes or test scores trigger asynchronous microservice computations. These immediately update compatibility matrices in MongoDB, dynamically reorganizing the student's catalog view and updating their readiness progression in real time.
+      </p>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 5 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 6: SCREENSHOT EVIDENCE - DISCOVERY & DASHBOARD
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 8.0 &bull; Implementation Evidence</div>
+      <h2 class="section-header">8. Screenshot Evidence: Student Core Interface</h2>
+
+      <!-- Screen 1: Dashboard -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; Candidate Career Dashboard (http://localhost:3000/student/dashboard)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px;">
+            <div style="background:white; padding:8px; border:1px solid #e2e8f0; border-radius:6px;">
+              <span style="font-size:9px; color:#64748b; font-weight:700;">ACTIVE APPLICATIONS</span>
+              <div style="font-size:16px; font-weight:800; color:#0f172a;">4</div>
+            </div>
+            <div style="background:white; padding:8px; border:1px solid #e2e8f0; border-radius:6px;">
+              <span style="font-size:9px; color:#64748b; font-weight:700;">TOP AI MATCH</span>
+              <div style="font-size:16px; font-weight:800; color:#2563eb;">94.2%</div>
+            </div>
+            <div style="background:white; padding:8px; border:1px solid #e2e8f0; border-radius:6px;">
+              <span style="font-size:9px; color:#64748b; font-weight:700;">READINESS TWIN</span>
+              <div style="font-size:16px; font-weight:800; color:#16a34a;">88%</div>
+            </div>
+            <div style="background:white; padding:8px; border:1px solid #e2e8f0; border-radius:6px;">
+              <span style="font-size:9px; color:#64748b; font-weight:700;">PROFILE COMPLETION</span>
+              <div style="font-size:16px; font-weight:800; color:#16a34a;">100%</div>
+            </div>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>Full Stack Developer Intern</strong> &bull; TechNova Solutions (Bengaluru)</span>
+            <span class="pill pill-green">94.2% COMPATIBILITY</span>
+            <span style="font-size:10px; color:#64748b;">Under Review</span>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>Cloud DevOps Intern</strong> &bull; InfoSys Ltd (Hyderabad)</span>
+            <span class="pill pill-blue">89.5% COMPATIBILITY</span>
+            <span style="font-size:10px; color:#64748b;">Interview Shortlisted</span>
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 1: Student Executive Dashboard with KPIs and Active Placement Pipeline</div>
+
+      <!-- Screen 2: Catalog -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; 24-Sector Internship Catalog (http://localhost:3000/student/internships)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>AI/ML Research Intern</strong> &bull; Bharat Electronics &bull; ₹25,000/mo &bull; On-Site</span>
+            <span class="pill pill-green">ELIGIBLE</span>
+            <button style="padding:2px 8px; font-size:9px; background:#2563eb; color:white; border:none; border-radius:3px; cursor:pointer;">Apply Now</button>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>Data Analyst Intern</strong> &bull; Deloitte India &bull; ₹20,000/mo &bull; Hybrid</span>
+            <span class="pill pill-green">ELIGIBLE</span>
+            <button style="padding:2px 8px; font-size:9px; background:#2563eb; color:white; border:none; border-radius:3px; cursor:pointer;">Apply Now</button>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>Cybersecurity Analyst</strong> &bull; Tata Advanced Systems &bull; ₹22,000/mo</span>
+            <span class="pill pill-orange">SKILL GAP: 1 PREREQUISITE</span>
+            <button style="padding:2px 8px; font-size:9px; background:#475569; color:white; border:none; border-radius:3px; cursor:pointer;">View Course</button>
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 2: Verified Corporate Internship Catalog with Sector and Eligibility Filters</div>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 6 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 7: SCREENSHOT EVIDENCE - RECOMMENDATIONS & RESUME
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <!-- Screen 3: AI Match -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; AI Recommendations (http://localhost:3000/student/recommendations)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="background:white; border:1px solid #e2e8f0; border-radius:5px; padding:8px; margin-bottom:8px;">
+            <div style="font-weight:700; font-size:10.5px; margin-bottom:4px;">Vector Match Profile Criteria:</div>
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#475569;">
+              <span>Verified Skills: <strong>React, Node.js, Python</strong></span>
+              <span>Degree: <strong>B.Tech CSE (8.4 CGPA)</strong></span>
+              <span>Location: <strong>Punjab / Delhi NCR</strong></span>
+              <span>Quota: <strong>PMIS General</strong></span>
+            </div>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>TechNova Solutions &bull; Full Stack Intern &bull; 94.2% Match Score</span>
+            <span class="pill pill-green">HIGHEST MATCH</span>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>InfoSys Ltd &bull; Cloud DevOps &bull; 89.5% Match Score</span>
+            <span class="pill pill-blue">SKILL FIT</span>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>Google India Research &bull; Deep Learning Research &bull; 82.0% Match Score</span>
+            <span class="pill pill-purple">ASPIRATIONAL</span>
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 3: Tiered AI Matching Studio with Explainable Multi-Factor Compatibility</div>
+
+      <!-- Screen 4: Resume Analyzer -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; ATS Resume Analyzer (http://localhost:3000/student/resume)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; margin-bottom:8px;">
+            <div style="background:white; padding:6px; border:1px solid #e2e8f0; border-radius:5px; text-align:center;">
+              <span style="font-size:9px; color:#64748b;">ATS SCORE</span>
+              <div style="font-size:15px; font-weight:800; color:#16a34a;">85/100</div>
+            </div>
+            <div style="background:white; padding:6px; border:1px solid #e2e8f0; border-radius:5px; text-align:center;">
+              <span style="font-size:9px; color:#64748b;">KEYWORDS</span>
+              <div style="font-size:15px; font-weight:800; color:#2563eb;">18 Found</div>
+            </div>
+            <div style="background:white; padding:6px; border:1px solid #e2e8f0; border-radius:5px; text-align:center;">
+              <span style="font-size:9px; color:#64748b;">FORMATTING</span>
+              <div style="font-size:15px; font-weight:800; color:#16a34a;">PASS</div>
+            </div>
+            <div style="background:white; padding:6px; border:1px solid #e2e8f0; border-radius:5px; text-align:center;">
+              <span style="font-size:9px; color:#64748b;">ACTION VERBS</span>
+              <div style="font-size:15px; font-weight:800; color:#d97706;">Needs +2</div>
+            </div>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; font-size:10.5px;">
+            <strong>Extracted Competencies:</strong> React, Node.js, Express, TypeScript, Tailwind, Git, REST APIs, MongoDB.
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 4: Automated ATS Resume Intelligence with Readability & Keyword Breakdown</div>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 7 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 8: SCREENSHOT EVIDENCE - SIMULATOR & CHECK-IN
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <!-- Screen 5: What-If Simulator -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; What-If Career Simulator &amp; Readiness Twin (http://localhost:3000/student/what-if)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="background:white; border:1px solid #e2e8f0; border-radius:5px; padding:8px; margin-bottom:8px;">
+            <div style="font-weight:700; font-size:10.5px; margin-bottom:4px;">Simulated Scenario: Add "AWS Cloud Practitioner" Certification</div>
+            <div style="display:flex; justify-content:space-between; font-size:10px;">
+              <span>Current Batch Rank: <strong>#42</strong></span>
+              <span>Projected Rank: <strong>#8</strong></span>
+              <span>Additional Eligible Seats: <strong>+350 Seats</strong></span>
+              <span style="color:#16a34a; font-weight:700;">+14% Probability Uplift</span>
+            </div>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>Readiness Digital Twin Trajectory: Technical (90%), Soft Skills (82%), Compliance (95%)</span>
+            <span class="pill pill-green">OPTIMAL WORKPLACE READY</span>
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 5: What-If Profile Simulation Sandbox & Digital Readiness Twin Projections</div>
+
+      <!-- Screen 6: Check-In -->
+      <div class="screen-card">
+        <div class="screen-header">
+          <div class="screen-dots"><span class="screen-dot dot-1"></span><span class="screen-dot dot-2"></span><span class="screen-dot dot-3"></span></div>
+          <span>Student Portal &bull; Smart GPS Check-In &amp; Allocation Letter (http://localhost:3000/student/check-in)</span>
+          <span class="pill pill-blue">Live Route</span>
+        </div>
+        <div class="screen-body">
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>Allocation Letter #SIH-2026-9402 &bull; TechNova Solutions &bull; Verified Digital Signature</span>
+            <button style="padding:2px 8px; font-size:9px; background:#16a34a; color:white; border:none; border-radius:3px; cursor:pointer;">Download PDF</button>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>GPS Geo-Check-In &bull; Latitude: 12.9716° N, Longitude: 77.5946° E &bull; Radius: 32m (Allowed &lt;50m)</span>
+            <span class="pill pill-green">VERIFIED ON-PREMISE</span>
+          </div>
+          <div style="background:white; border:1px solid #e2e8f0; padding:6px 10px; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+            <span>Monthly Stipend Status &bull; ₹20,000 Govt Direct Benefit Transfer (DBT)</span>
+            <span class="pill pill-blue">VALIDATED FOR DISBURSAL</span>
+          </div>
+        </div>
+      </div>
+      <div class="screen-caption">Figure 6: Formal Allocation Letter Issuance & Anti-Proxy GPS Geo-Check-In</div>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 8 of 9</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 9: SCOPE, CONCLUSION, REFERENCES & SIGN-OFF
+       ======================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <span>Lovely Professional University &bull; School of CSE</span>
+        <span>Candidate Experience &bull; Student Portal</span>
+      </div>
+
+      <div class="chapter-badge">Section 9.0 &bull; Evaluation &amp; Horizons</div>
+      <h2 class="section-header">9. Current Scope, Future Roadmap &amp; Conclusion</h2>
+
+      <h3 class="sub-header">9.1 Completed Candidate Scope</h3>
+      <p>
+        The student portal delivers all 14 planned functional modules: Candidate Command Dashboard, Academic Profile Ledger, ATS Resume Analyzer, 24-Sector Internship Catalog, Tiered AI Recommendations, Live Kanban Application Tracker, Formal Allocation Letter PDF Download, Autonomous Skill Gap Remediation, Digital Readiness Twin Progression, What-If Career Simulation Sandbox, Proctored Online Domain Assessments, Smart GPS Geo Check-In, Workplace 360 Feedback, and Post-Internship Competency Outcomes.
+      </p>
+
+      <h3 class="sub-header">9.2 Future Development Horizons</h3>
+      <ol>
+        <li><strong>Vernacular Voice AI Interface:</strong> Integrate multilingual voice navigation in regional Indian languages (Hindi, Punjabi, Tamil, Telugu) via Bhashini API to support candidates with low digital literacy.</li>
+        <li><strong>AI Multimodal Video Mock Interviews:</strong> Deliver real-time interactive interview practice with instant computer-vision feedback on communication demeanor, eye contact, and technical fluency.</li>
+        <li><strong>National Blockchain Credential Anchoring:</strong> Anchor verifiable internship completion badges directly onto the National Blockchain Framework to prevent credential fraud.</li>
+      </ol>
+
+      <h2 class="section-header">10. Conclusion</h2>
+      <p>
+        The <strong>Student Portal of the Intern AI Platform (SIH25033)</strong> fundamentally re-engineers the national placement paradigm from an opaque application lottery into an empowering, AI-guided career accelerator. By combining explainable matching scores with actionable skill gap roadmaps, predictive What-If simulation sandboxes, and verified attendance tracking, the platform guarantees that every candidate—regardless of geographical or institutional background—receives an equitable pathway to professional excellence under the Prime Minister’s Internship Scheme.
+      </p>
+
+      <h2 class="section-header">11. Academic References</h2>
+      <ol style="font-size: 10px; color: #475569; margin-left: 16px;">
+        <li>Gale, D., &amp; Shapley, L. S. (1962). College admissions and the stability of marriage. <em>The American Mathematical Monthly</em>, 69(1), 9–15.</li>
+        <li>Ministry of Corporate Affairs, Government of India. (2024). <em>Operational Guidelines for Prime Minister’s Internship Scheme (PMIS)</em>. New Delhi: MCA.</li>
+        <li>Salton, G., &amp; Buckley, C. (1988). Term-weighting approaches in automatic text retrieval. <em>Information Processing &amp; Management</em>, 24(5), 513–523.</li>
+      </ol>
+
+      <!-- Formal 3-Column Academic Sign-Off Block -->
+      <div style="margin-top: 28px; padding-top: 16px; border-top: 1.5px dashed #94a3b8;">
+        <div style="display: flex; justify-content: space-between; text-align: center;">
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 35px;">Submitted By:</div>
+            <div style="border-top: 1px solid #0f172a; width: 170px; padding-top: 4px; font-weight: 700; font-size: 12px; color: #0f172a;">Aashik Kumar</div>
+            <div style="font-size: 10px; color: #64748b;">Reg. No: 12306949</div>
+            <div style="font-size: 9.5px; color: #94a3b8;">B.Tech CSE, LPU</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 35px;">Evaluated By:</div>
+            <div style="border-top: 1px solid #0f172a; width: 170px; padding-top: 4px; font-weight: 700; font-size: 12px; color: #0f172a;">Konne Madhavi</div>
+            <div style="font-size: 10px; color: #64748b;">Faculty Mentor &bull; Assistant Professor</div>
+            <div style="font-size: 9.5px; color: #94a3b8;">Department of CSE, LPU</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 35px;">Department Head:</div>
+            <div style="border-top: 1px solid #0f172a; width: 170px; padding-top: 4px; font-weight: 700; font-size: 12px; color: #0f172a;">School of Computer Science</div>
+            <div style="font-size: 10px; color: #64748b;">Lovely Professional University</div>
+            <div style="font-size: 9.5px; color: #94a3b8;">Phagwara, Punjab</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>Candidate: Aashik Kumar (12306949)</span>
+      <span>Intern AI &bull; Student Portal Progress Report</span>
+      <span>Page 9 of 9</span>
+    </div>
+  </div>
+
+</body>
+</html>

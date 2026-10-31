@@ -1,0 +1,426 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* =========================================================
+   BASE THEME VARIABLES
+   ========================================================= */
+
+/* ── Default Light Theme ──────────────────────────────── */
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Default Primary: Amber/Orange */
+  --primary: #ea580c;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+
+  --accent: #f8fafc;
+  --accent-foreground: #0f172a;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #ea580c;
+
+  --chart-1: #ea580c;
+  --chart-2: #3b82f6;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #a855f7;
+
+  --radius: 0.625rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #ea580c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #ea580c;
+
+  --theme-glow: rgba(234, 88, 12, 0.25);
+  --theme-color: #ea580c;
+}
+
+/* ── Default Dark Theme (Cyber Obsidian - Matching Screenshots!) ── */
+.dark {
+  --background: #07090e;
+  --foreground: #f8fafc;
+
+  --card: #0d111c;
+  --card-foreground: #f8fafc;
+
+  --popover: #0d111c;
+  --popover-foreground: #f8fafc;
+
+  /* Radiant Solar Amber (HubSpot AI Cyber Aesthetic) */
+  --primary: #f97316;
+  --primary-foreground: #030712;
+
+  --secondary: #141a29;
+  --secondary-foreground: #f8fafc;
+
+  --muted: #111726;
+  --muted-foreground: #94a3b8;
+
+  --accent: #161e30;
+  --accent-foreground: #f8fafc;
+
+  --destructive: #f43f5e;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #f97316;
+
+  --chart-1: #f97316;
+  --chart-2: #38bdf8;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #c084fc;
+
+  --sidebar: #05070c;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #030712;
+  --sidebar-accent: #111726;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #f97316;
+
+  --theme-glow: rgba(249, 115, 22, 0.35);
+  --theme-color: #f97316;
+}
+
+/* =========================================================
+   MULTI-COLOR PALETTES (DATA-THEME SWITCHER)
+   ========================================================= */
+
+/* 1. Cyber Amber (Default) */
+[data-theme="amber"]:not(.dark),
+:root[data-theme="amber"] {
+  --primary: #ea580c;
+  --primary-foreground: #ffffff;
+  --ring: #ea580c;
+  --sidebar-primary: #ea580c;
+  --theme-glow: rgba(234, 88, 12, 0.28);
+  --theme-color: #ea580c;
+}
+.dark[data-theme="amber"] {
+  --primary: #f97316;
+  --primary-foreground: #030712;
+  --ring: #f97316;
+  --sidebar-primary: #f97316;
+  --theme-glow: rgba(249, 115, 22, 0.45);
+  --theme-color: #f97316;
+}
+
+/* 2. Electric Cyan / Neon Azure */
+[data-theme="blue"]:not(.dark),
+:root[data-theme="blue"] {
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --ring: #2563eb;
+  --sidebar-primary: #2563eb;
+  --theme-glow: rgba(37, 99, 235, 0.28);
+  --theme-color: #2563eb;
+}
+.dark[data-theme="blue"] {
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --ring: #3b82f6;
+  --sidebar-primary: #3b82f6;
+  --theme-glow: rgba(59, 130, 246, 0.45);
+  --theme-color: #3b82f6;
+}
+
+/* 3. Neon Violet / Cyber Magenta */
+[data-theme="violet"]:not(.dark),
+:root[data-theme="violet"] {
+  --primary: #9333ea;
+  --primary-foreground: #ffffff;
+  --ring: #9333ea;
+  --sidebar-primary: #9333ea;
+  --theme-glow: rgba(147, 51, 234, 0.28);
+  --theme-color: #9333ea;
+}
+.dark[data-theme="violet"] {
+  --primary: #a855f7;
+  --primary-foreground: #ffffff;
+  --ring: #a855f7;
+  --sidebar-primary: #a855f7;
+  --theme-glow: rgba(168, 85, 247, 0.45);
+  --theme-color: #a855f7;
+}
+
+/* 4. Matrix Emerald */
+[data-theme="emerald"]:not(.dark),
+:root[data-theme="emerald"] {
+  --primary: #059669;
+  --primary-foreground: #ffffff;
+  --ring: #059669;
+  --sidebar-primary: #059669;
+  --theme-glow: rgba(5, 150, 105, 0.28);
+  --theme-color: #059669;
+}
+.dark[data-theme="emerald"] {
+  --primary: #10b981;
+  --primary-foreground: #022c22;
+  --ring: #10b981;
+  --sidebar-primary: #10b981;
+  --theme-glow: rgba(16, 185, 129, 0.45);
+  --theme-color: #10b981;
+}
+
+/* 5. Sunset Crimson */
+[data-theme="crimson"]:not(.dark),
+:root[data-theme="crimson"] {
+  --primary: #e11d48;
+  --primary-foreground: #ffffff;
+  --ring: #e11d48;
+  --sidebar-primary: #e11d48;
+  --theme-glow: rgba(225, 29, 72, 0.28);
+  --theme-color: #e11d48;
+}
+.dark[data-theme="crimson"] {
+  --primary: #f43f5e;
+  --primary-foreground: #ffffff;
+  --ring: #f43f5e;
+  --sidebar-primary: #f43f5e;
+  --theme-glow: rgba(244, 63, 94, 0.45);
+  --theme-color: #f43f5e;
+}
+
+/* 6. Cosmic Indigo */
+[data-theme="indigo"]:not(.dark),
+:root[data-theme="indigo"] {
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --ring: #4f46e5;
+  --sidebar-primary: #4f46e5;
+  --theme-glow: rgba(79, 70, 229, 0.28);
+  --theme-color: #4f46e5;
+}
+.dark[data-theme="indigo"] {
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --ring: #6366f1;
+  --sidebar-primary: #6366f1;
+  --theme-glow: rgba(99, 102, 241, 0.45);
+  --theme-color: #6366f1;
+}
+
+/* =========================================================
+   BASE STYLES & SCROLLBAR
+   ========================================================= */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  html {
+    @apply h-full antialiased;
+    scroll-behavior: smooth;
+  }
+
+  /* Sleek Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+/* =========================================================
+   CUSTOM CYBER / AI UTILITIES & KEYFRAMES
+   ========================================================= */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-12px) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes streamMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.radar-sweep {
+  animation: radarSweep 8s linear infinite;
+}
+
+.pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.particle-float {
+  animation: floatParticle 3.5s ease-in-out infinite;
+}
+
+/* Cyber dot pattern */
+.cyber-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+:root:not(.dark) .cyber-dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* 3 Neon Glow Cards (Image 2 Match) */
+.neon-card-blue {
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.15), inset 0 0 15px rgba(59, 130, 246, 0.05);
+}
+.neon-card-blue:hover {
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.28), inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.neon-card-orange {
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.15), inset 0 0 15px rgba(249, 115, 22, 0.05);
+}
+.neon-card-orange:hover {
+  border-color: rgba(249, 115, 22, 0.8);
+  box-shadow: 0 0 40px rgba(249, 115, 22, 0.28), inset 0 0 20px rgba(249, 115, 22, 0.1);
+}
+
+.neon-card-purple {
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 15px rgba(168, 85, 247, 0.05);
+}
+.neon-card-purple:hover {
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.28), inset 0 0 20px rgba(168, 85, 247, 0.1);
+}
+
+/* Glassmorphic Cyber Card */
+.cyber-card {
+  background: rgba(13, 17, 28, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root:not(.dark) .cyber-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.cyber-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 30px var(--theme-glow);
+}
+
+/* Button with Dynamic Theme Glow */
+.btn-theme-glow {
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 75%, #ffffff));
+  color: var(--primary-foreground);
+  box-shadow: 0 0 25px var(--theme-glow);
+  transition: all 0.2s ease;
+}
+.btn-theme-glow:hover {
+  box-shadow: 0 0 35px var(--theme-glow);
+  transform: translateY(-1px);
+}
