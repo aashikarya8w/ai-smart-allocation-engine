@@ -310,7 +310,7 @@ export default function CompanyDashboardPage() {
                         {item.title}
                       </h4>
                       <p className="text-[11px] text-muted-foreground mt-0.5">
-                        {item.location} · {item.duration}
+                        {item.city}, {item.state} · {item.duration}
                       </p>
                     </div>
                     <StatusBadge status={item.status} />

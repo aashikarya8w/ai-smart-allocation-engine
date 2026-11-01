@@ -183,7 +183,9 @@ export default function InternshipsPage() {
                         <p className="flex items-center gap-1.5 text-xs text-muted-foreground mt-0.5">
                           <Building2Icon className="size-3.5 text-primary/70 shrink-0" />
                           <span className="truncate font-medium text-foreground/80">{i.companyName}</span>
-                          <CheckCircle2Icon className="size-3 text-emerald-400 shrink-0" title="Verified Employer" />
+                          <span title="Verified Employer" className="inline-flex items-center">
+                            <CheckCircle2Icon className="size-3 text-emerald-400 shrink-0" />
+                          </span>
                         </p>
                       </div>
                     </div>

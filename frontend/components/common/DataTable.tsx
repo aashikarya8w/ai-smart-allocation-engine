@@ -23,8 +23,10 @@ interface DataTableProps<T> {
   isLoading?: boolean;
   emptyTitle?: string;
   emptyDescription?: string;
+  emptyMessage?: string;
   className?: string;
   rowClassName?: (row: T) => string;
+  keyExtractor?: (row: T) => string | number;
 }
 
 export function DataTable<T>({
@@ -33,8 +35,10 @@ export function DataTable<T>({
   isLoading,
   emptyTitle = "No results found",
   emptyDescription,
+  emptyMessage,
   className,
   rowClassName,
+  keyExtractor,
 }: DataTableProps<T>) {
   if (isLoading) return <LoadingTable />;
 
@@ -58,7 +62,7 @@ export function DataTable<T>({
             <TableRow>
               <TableCell colSpan={columns.length} className="p-0">
                 <EmptyState
-                  title={emptyTitle}
+                  title={emptyMessage || emptyTitle}
                   description={emptyDescription}
                 />
               </TableCell>
@@ -66,7 +70,7 @@ export function DataTable<T>({
           ) : (
             data.map((row, i) => (
               <TableRow
-                key={i}
+                key={keyExtractor ? keyExtractor(row) : i}
                 className={cn("hover:bg-muted/40", rowClassName?.(row))}
               >
                 {columns.map((col) => (
