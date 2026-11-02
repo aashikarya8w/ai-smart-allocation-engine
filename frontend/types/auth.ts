@@ -29,3 +29,11 @@ export interface RegisterPayload {
   password: string;
   role: "student" | "company";
 }
+
+export interface GoogleAuthPayload {
+  email: string;
+  name: string;
+  role: UserRole;
+  avatar?: string;
+  googleId?: string;
+}

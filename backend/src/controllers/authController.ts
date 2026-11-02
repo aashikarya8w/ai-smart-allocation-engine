@@ -18,6 +18,11 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   sendSuccess(res, data, "Login successful");
 });
 
+export const googleAuth = asyncHandler(async (req: Request, res: Response) => {
+  const data = await authService.googleAuth(req.body);
+  sendSuccess(res, data, "Google authentication successful");
+});
+
 export const logout = asyncHandler(async (req: Request, res: Response) => {
   await authService.logout(req.user!.userId);
   sendSuccess(res, null, "Logged out successfully");

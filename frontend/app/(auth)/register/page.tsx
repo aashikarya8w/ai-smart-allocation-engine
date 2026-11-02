@@ -30,6 +30,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { Logo } from "@/components/common/Logo";
+import { GoogleAuthButton } from "@/components/auth/GoogleAuthButton";
 
 import { registerSchema, type RegisterFormData } from "@/lib/validations";
 import { registerService } from "@/services/authService";
@@ -267,6 +268,16 @@ export default function RegisterPage() {
                 <BuildingIcon className="size-4" />
                 <span>I&rsquo;m a Company</span>
               </button>
+            </div>
+
+            {/* Google Registration Option */}
+            <div className="mt-5">
+              <GoogleAuthButton
+                role={selectedRole}
+                actionType="register"
+                dividerText="Or register with email"
+                onError={(err) => setServerError(err)}
+              />
             </div>
 
             {/* Registration Form */}

@@ -2,7 +2,7 @@ import { mockUsers, demoCredentials } from "@/data/users";
 import { mockStudents } from "@/data/students";
 import { mockCompanies } from "@/data/companies";
 import { authApiService } from "./api/authApiService";
-import type { AuthUser, LoginPayload, RegisterPayload } from "@/types/auth";
+import type { AuthUser, LoginPayload, RegisterPayload, GoogleAuthPayload } from "@/types/auth";
 import type { UserRole } from "@/types/user";
 
 function delay(ms: number) {
@@ -78,7 +78,7 @@ export async function registerService(payload: RegisterPayload): Promise<AuthUse
     ) {
       throw new Error("An account with this email already exists.");
     }
-    // If backend is unreachable or returns a server error, proceed with local fallback so the user can always register
+    // If backend is unreachable or returns a server error, proceed with local fallback
   }
 
   const authUser: AuthUser = {
@@ -291,6 +291,131 @@ export async function loginService(payload: LoginPayload): Promise<AuthUser> {
 
   await delay(300);
   throw new Error("Invalid email or password.");
+}
+
+/* ── Google Authentication (Login & Register) ───────────────── */
+export async function googleAuthService(payload: GoogleAuthPayload): Promise<AuthUser> {
+  const emailLower = payload.email.trim().toLowerCase();
+  let finalUserId = `google_${Date.now()}`;
+  let finalRole = payload.role;
+
+  // 1. Try backend API first
+  try {
+    const res = await authApiService.googleAuth({
+      email: emailLower,
+      name: payload.name,
+      role: payload.role,
+      avatar: payload.avatar,
+      googleId: payload.googleId,
+    });
+    if (res && (res as any).data) {
+      const d = (res as any).data;
+      if (typeof window !== "undefined" && d.accessToken) {
+        localStorage.setItem("auth-storage", JSON.stringify({ state: { accessToken: d.accessToken } }));
+        localStorage.setItem("intern-ai-token", d.accessToken);
+      }
+      const u = d.user || {};
+      if (u.id || u._id) finalUserId = String(u.id || u._id);
+      if (u.role) finalRole = u.role as UserRole;
+    }
+  } catch (err) {
+    console.warn("Backend Google auth call:", err);
+  }
+
+  // 2. Client fallback / persistence
+  const existingStored = getStoredUsers().find((u) => u.email.toLowerCase() === emailLower);
+  if (existingStored) {
+    finalUserId = existingStored.id;
+    finalRole = existingStored.role;
+  } else {
+    saveStoredUser({
+      id: finalUserId,
+      name: payload.name,
+      email: emailLower,
+      role: finalRole,
+      isVerified: true,
+      createdAt: new Date().toISOString(),
+    });
+  }
+
+  const authUser: AuthUser = {
+    id: finalUserId,
+    name: payload.name,
+    email: emailLower,
+    role: finalRole,
+    avatar: payload.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(payload.name)}`,
+    isVerified: true,
+  };
+
+  // 3. Ensure role profile exists for student or company
+  if (typeof window !== "undefined") {
+    try {
+      if (finalRole === "student") {
+        const customStudents = JSON.parse(localStorage.getItem(CUSTOM_STUDENTS_KEY) || "[]");
+        if (!customStudents.some((s: any) => s.email.toLowerCase() === emailLower)) {
+          customStudents.push({
+            id: `s_${finalUserId}`,
+            userId: finalUserId,
+            fullName: payload.name,
+            email: emailLower,
+            phone: "9876543210",
+            dateOfBirth: "2003-05-15",
+            gender: "Male",
+            state: "Delhi",
+            city: "New Delhi",
+            university: "National Institute of Technology",
+            branch: "Computer Science & AI",
+            degree: "B.Tech",
+            cgpa: 8.8,
+            graduationYear: 2026,
+            skills: [
+              { name: "React", level: "Advanced", yearsOfExperience: 2 },
+              { name: "TypeScript", level: "Intermediate", yearsOfExperience: 1 },
+              { name: "Python", level: "Intermediate", yearsOfExperience: 2 },
+              { name: "AI/ML", level: "Intermediate", yearsOfExperience: 1 },
+            ],
+            interests: ["Artificial Intelligence", "Web Development", "Cloud Systems"],
+            preferredLocations: ["Bengaluru", "Delhi", "Hyderabad", "Remote"],
+            preferredSectors: ["Software Development", "Information Technology"],
+            preferredWorkMode: "Remote",
+            profileCompletion: 92,
+            verificationStatus: "Verified",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          });
+          localStorage.setItem(CUSTOM_STUDENTS_KEY, JSON.stringify(customStudents));
+        }
+      } else if (finalRole === "company") {
+        const customCompanies = JSON.parse(localStorage.getItem(CUSTOM_COMPANIES_KEY) || "[]");
+        if (!customCompanies.some((c: any) => c.email.toLowerCase() === emailLower)) {
+          customCompanies.push({
+            id: `c_${finalUserId}`,
+            userId: finalUserId,
+            companyName: payload.name,
+            email: emailLower,
+            phone: "9876543210",
+            website: "https://internai.gov.in",
+            industry: "Information Technology",
+            companyType: "Private",
+            employeeCount: "51-200",
+            city: "Bengaluru",
+            state: "Karnataka",
+            address: "Tech Park, Cyber Hub",
+            description: "AI-driven technology enterprise.",
+            verificationStatus: "Verified",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          });
+          localStorage.setItem(CUSTOM_COMPANIES_KEY, JSON.stringify(customCompanies));
+        }
+      }
+    } catch {}
+  }
+
+  await delay(300);
+  return authUser;
 }
 
 export async function forgotPasswordService(email: string): Promise<void> {

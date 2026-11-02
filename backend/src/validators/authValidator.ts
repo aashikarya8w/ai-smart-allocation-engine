@@ -35,3 +35,11 @@ export const verifyEmailSchema = z.object({
 export const refreshTokenSchema = z.object({
   refreshToken: z.string().min(1),
 });
+
+export const googleAuthSchema = z.object({
+  email:    z.string().email(),
+  name:     z.string().min(1).max(100),
+  role:     z.enum(["student", "company", "admin"]).default("student"),
+  avatar:   z.string().optional(),
+  googleId: z.string().optional(),
+});

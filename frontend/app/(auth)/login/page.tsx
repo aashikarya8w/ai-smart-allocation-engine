@@ -42,6 +42,7 @@ import { demoCredentials } from "@/data/users";
 import { ROUTES } from "@/lib/constants";
 
 import type { UserRole } from "@/types/user";
+import { GoogleAuthButton } from "@/components/auth/GoogleAuthButton";
 
 const ROLES: {
   value: UserRole;
@@ -249,8 +250,18 @@ export default function LoginPage() {
               })}
             </div>
 
+            {/* Google Authentication */}
+            <div className="mt-5">
+              <GoogleAuthButton
+                role={selectedRole}
+                actionType="login"
+                dividerText="Or sign in with email"
+                onError={(err) => setServerErr(err)}
+              />
+            </div>
+
             {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <input type="hidden" value={selectedRole} {...register("role")} />
 
               {/* Email */}

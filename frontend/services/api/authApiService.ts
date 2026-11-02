@@ -7,6 +7,9 @@ export const authApiService = {
   login: (data: { email: string; password: string; role: string }) =>
     api.post<{ data: { accessToken: string; refreshToken: string; user: unknown } }>("/auth/login", data),
 
+  googleAuth: (data: { email: string; name: string; role: string; avatar?: string; googleId?: string }) =>
+    api.post<{ data: { accessToken: string; refreshToken: string; user: unknown } }>("/auth/google", data),
+
   logout: () =>
     api.post("/auth/logout"),
 

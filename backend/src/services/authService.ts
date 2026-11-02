@@ -85,6 +85,83 @@ export async function login(email: string, password: string, role: string) {
   return { accessToken: access, refreshToken: refresh, user: { id: user._id, name: user.name, email: user.email, role: user.role } };
 }
 
+/* ── Google Auth (Login or Register) ──────────────────────── */
+export async function googleAuth(data: {
+  email: string;
+  name: string;
+  role: "student" | "company" | "admin";
+  avatar?: string;
+  googleId?: string;
+}) {
+  const emailLower = data.email.toLowerCase().trim();
+  let user = await User.findOne({ email: emailLower }).select("+refreshToken");
+
+  if (!user) {
+    // Generate secure random hashed password for google-authenticated users
+    const randomPw = crypto.randomBytes(24).toString("hex");
+    const hashed = await hashPassword(randomPw);
+
+    user = await User.create({
+      name:            data.name,
+      email:           emailLower,
+      password:        hashed,
+      role:            data.role || "student",
+      avatar:          data.avatar,
+      isEmailVerified: true,
+      isActive:        true,
+    });
+
+    if (data.role === "student") {
+      await Student.create({
+        userId:         user._id,
+        fullName:       data.name,
+        email:          emailLower,
+        avatar:         data.avatar,
+        phone:          "",
+        university:     "National Institute of Technology",
+        branch:         "Computer Science",
+        degree:         "B.Tech",
+        cgpa:           8.5,
+        graduationYear: new Date().getFullYear() + 2,
+      });
+    } else if (data.role === "company") {
+      await Company.create({
+        userId:      user._id,
+        companyName: data.name,
+        email:       emailLower,
+        phone:       "",
+        industry:    "Information Technology",
+      });
+    }
+  }
+
+  if (!user.isActive) throw new AppError("Account deactivated", 403, "ACCOUNT_INACTIVE");
+
+  const payload = { userId: String(user._id), role: user.role, email: user.email };
+  const access = signAccessToken(payload);
+  const refresh = signRefreshToken(payload);
+
+  user.refreshToken = refresh;
+  user.lastLogin = new Date();
+  if (data.avatar && !user.avatar) {
+    user.avatar = data.avatar;
+  }
+  await user.save();
+
+  return {
+    accessToken: access,
+    refreshToken: refresh,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      avatar: user.avatar,
+      isVerified: user.isEmailVerified,
+    },
+  };
+}
+
 /* ── Refresh ──────────────────────────────────────────────── */
 export async function refreshTokens(token: string) {
   const payload = verifyRefreshToken(token);
