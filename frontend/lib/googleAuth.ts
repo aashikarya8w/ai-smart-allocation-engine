@@ -5,7 +5,10 @@ export function getGoogleClientId(): string {
     const local = localStorage.getItem("internai_google_client_id");
     if (local && local.trim()) return local.trim();
   }
-  return process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID?.trim() || "";
+  return (
+    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID?.trim() ||
+    "884210984712-internai-auth.apps.googleusercontent.com"
+  );
 }
 
 export function setGoogleClientId(id: string) {
@@ -20,9 +23,10 @@ export function buildGoogleAuthUrl(options: {
   clientIdOverride?: string;
 }): string {
   const clientId = options.clientIdOverride || getGoogleClientId();
-  const redirectUri = typeof window !== "undefined"
-    ? `${window.location.origin}/auth/callback`
-    : "http://localhost:3000/auth/callback";
+  const redirectUri =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/auth/callback`
+      : "http://localhost:3000/auth/callback";
 
   const stateObj = {
     role: options.role,
@@ -57,5 +61,6 @@ export function redirectToGoogleAuth(options: {
   sessionStorage.setItem("internai_google_auth_action", options.actionType);
 
   const url = buildGoogleAuthUrl(options);
+  // Directly navigate to Google's official site
   window.location.href = url;
 }

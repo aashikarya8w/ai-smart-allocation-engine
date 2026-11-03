@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { GoogleIcon } from "./GoogleIcon";
-import { GoogleOAuthModal } from "./GoogleOAuthModal";
-import { getGoogleClientId, redirectToGoogleAuth } from "@/lib/googleAuth";
+import { redirectToGoogleAuth } from "@/lib/googleAuth";
 import type { UserRole } from "@/types/user";
 
 interface GoogleAuthButtonProps {
@@ -21,22 +20,17 @@ export function GoogleAuthButton({
   dividerText = "Or continue with email",
   className = "",
 }: GoogleAuthButtonProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   function handleClick() {
-    const clientId = getGoogleClientId();
-    if (clientId) {
-      setIsRedirecting(true);
-      redirectToGoogleAuth({ role, actionType });
-    } else {
-      setIsModalOpen(true);
-    }
+    setIsRedirecting(true);
+    // Directly redirect to official accounts.google.com without any modal
+    redirectToGoogleAuth({ role, actionType });
   }
 
   return (
     <div className={`w-full ${className}`}>
-      {/* Official Google Button */}
+      {/* Official Google Button - Direct 1-Click Redirect */}
       <button
         type="button"
         disabled={isRedirecting}
@@ -66,14 +60,6 @@ export function GoogleAuthButton({
           {dividerText}
         </span>
       </div>
-
-      {/* Google OAuth Modal (if Client ID not yet configured) */}
-      <GoogleOAuthModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        role={role}
-        actionType={actionType}
-      />
     </div>
   );
 }
