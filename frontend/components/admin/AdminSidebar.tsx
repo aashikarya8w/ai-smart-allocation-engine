@@ -8,7 +8,7 @@ import {
   TagIcon, MapPinIcon, BarChart3Icon, BellIcon, ScrollTextIcon,
   FileTextIcon, ShieldIcon, SettingsIcon, GraduationCapIcon,
   RefreshCwIcon, ArrowLeftRightIcon, ActivityIcon, QrCodeIcon,
-  StarIcon, TrendingUpIcon, ScaleIcon, FlaskConicalIcon,
+  StarIcon, TrendingUpIcon, ScaleIcon, FlaskConicalIcon, BotIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
@@ -91,6 +91,7 @@ export function AdminSidebar() {
           Admin Governance Hub
         </p>
       </div>
+
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-4">
         {NAV_GROUPS.map((group) => (
           <div key={group.label}>
@@ -120,6 +121,26 @@ export function AdminSidebar() {
           </div>
         ))}
       </nav>
+
+      {/* AI Governance Copilot Widget */}
+      <div className="p-3 border-t border-sidebar-border/50">
+        <Link
+          href={ROUTES.admin.aiMatching}
+          className="group relative flex items-center gap-3 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent p-3 shadow-[0_0_20px_var(--theme-glow)] transition-all hover:scale-[1.02] hover:border-primary/60"
+        >
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-[0_0_12px_var(--theme-glow)] group-hover:scale-105 transition-transform">
+            <BotIcon className="size-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-bold text-foreground group-hover:text-primary transition-colors truncate">
+              AI Governance Copilot
+            </p>
+            <p className="text-[10px] text-muted-foreground truncate">
+              Policy, quota & audit insights
+            </p>
+          </div>
+        </Link>
+      </div>
     </aside>
   );
 }

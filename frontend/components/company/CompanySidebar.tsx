@@ -13,6 +13,7 @@ import {
   BellIcon,
   SettingsIcon,
   StarIcon,
+  BotIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
@@ -42,6 +43,7 @@ export function CompanySidebar() {
           Company Workspace
         </p>
       </div>
+
       <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-3">
         {NAV.map((item) => {
           const active = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -67,6 +69,26 @@ export function CompanySidebar() {
           );
         })}
       </nav>
+
+      {/* AI Hiring Copilot Widget */}
+      <div className="p-3 border-t border-sidebar-border/50">
+        <Link
+          href={ROUTES.company.candidates}
+          className="group relative flex items-center gap-3 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent p-3 shadow-[0_0_20px_var(--theme-glow)] transition-all hover:scale-[1.02] hover:border-primary/60"
+        >
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-[0_0_12px_var(--theme-glow)] group-hover:scale-105 transition-transform">
+            <BotIcon className="size-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-bold text-foreground group-hover:text-primary transition-colors truncate">
+              AI Hiring Copilot
+            </p>
+            <p className="text-[10px] text-muted-foreground truncate">
+              Smart candidate & JD help
+            </p>
+          </div>
+        </Link>
+      </div>
     </aside>
   );
 }
