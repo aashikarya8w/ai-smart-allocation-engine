@@ -115,7 +115,7 @@ const SEARCH_ITEMS: SearchItem[] = [
   {
     title: "Student Verification Queue",
     description: "Academic & identity documents verification",
-    href: ROUTES.admin.studentsVerification,
+    href: ROUTES.admin.studentVerification,
     keywords: ["verify student", "student verification", "documents", "kyc student"],
     category: "Directory",
     icon: ShieldCheckIcon,
@@ -131,7 +131,7 @@ const SEARCH_ITEMS: SearchItem[] = [
   {
     title: "Corporate Verification Queue",
     description: "Verify GSTIN, CIN & corporate eligibility under PM scheme",
-    href: ROUTES.admin.companiesVerification,
+    href: ROUTES.admin.companyVerification,
     keywords: ["verify company", "company verification", "kyc company", "gstin"],
     category: "Directory",
     icon: ShieldCheckIcon,
